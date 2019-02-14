@@ -1,0 +1,72 @@
+===== Customer =====
+id
+firstName
+lastName
+gender
+date_of_birth
+phone_number
+
+==== ShippingAddress =======
+id
+customerId
+name
+phone_number
+province
+city
+district
+postalCode
+mainAddress (boolean)
+storeAddress (boolean)
+Description
+
+===== Authentication =====
+id
+customerId
+email
+password
+salt
+
+//==== BANK ==========
+//id
+//nama
+//nomor_kartu
+//kadaluarsa
+//alamat_tagihan
+//kode_pos
+
+======= Transaction ==========
+id
+customerId
+date
+shippingAddress
+
+====== TransactionDetail =========
+id
+productId
+transactionId
+productMeter
+productPrice
+
+====== Product =============
+id
+name
+price
+
+====== ProductIncoming =======
+id
+supplierId
+productId
+dateOfPurchase
+dateOfReceipt
+meter
+price
+
+====== Supplier =====
+id
+nama
+
+
+===== City =====
+==== Province =====
+===== District ====
+===== PostalCode ======
