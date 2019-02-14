@@ -1,9 +1,17 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
-  const Address = sequelize.define('Address', {
-    nama: DataTypes.STRING,
-    nomor_telpon: DataTypes.STRING
-  }, {});
+  const Address = sequelize.define(
+    "Address",
+    {
+      address: DataTypes.STRING,
+      province: DataTypes.STRING,
+      city: DataTypes.STRING,
+      district: DataTypes.STRING,
+      postalCode: DataTypes.INTEGER,
+      phoneNumber: DataTypes.STRING
+    },
+    {}
+  );
   Address.associate = function(models) {
     // associations can be defined here
   };

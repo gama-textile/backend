@@ -1,17 +1,38 @@
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Addresses', {
+    return queryInterface.createTable("Addresses", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nama: {
+      address: {
         type: Sequelize.STRING
       },
-      nomor_telpon: {
+      province: {
+        type: Sequelize.STRING
+      },
+      city: {
+        type: Sequelize.STRING
+      },
+      district: {
+        type: Sequelize.STRING
+      },
+      postalCode: {
+        type: Sequelize.INTEGER
+      },
+      phoneNumber: {
+        type: Sequelize.STRING
+      },
+      mainAddress: {
+        type: Sequelize.BOOLEAN
+      },
+      storeAddress: {
+        type: Sequelize.STRING
+      },
+      description: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -25,6 +46,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Addresses');
+    return queryInterface.dropTable("Addresses");
   }
 };
