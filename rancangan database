@@ -1,0 +1,89 @@
+===== Authentication =====
+id
+customerId
+phoneNumber
+email
+gmail
+facebook
+password
+salt
+lastLogin
+
+===== Customer =====
+id
+firstName
+lastName
+gender
+dateOfBirth
+
+==== ShippingAddress =======
+id
+customerId
+name
+cityId
+provinceId
+districtId
+postalCodeId
+mainAddress (boolean)
+storeAddress (boolean)
+description
+
+======= Transaction ==========
+id
+customerId
+orderDate
+shippingaddressId
+statusproductId
+statustransactionId
+
+====== StatusProduct ========
+id
+status
+
+====== Status Transaction =======
+id
+status
+
+====== TransactionDetail =========
+id
+productId
+transactionId
+productMeter
+productPrice
+
+====== Product =============
+id
+name
+price
+
+====== ProductIncoming =======
+id
+supplierId
+productId
+dateOfPurchase
+dateOfReceipt
+purchaseMeter
+purchasePrice
+
+====== Supplier =====
+id
+nama
+
+===== City =====
+id
+name
+
+==== Province =====
+id
+cityId
+name
+
+===== District ====
+id
+provinceId
+name
+
+===== PostalCode ======
+id
+districtId
+name

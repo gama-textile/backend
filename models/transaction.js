@@ -4,12 +4,13 @@ module.exports = (sequelize, DataTypes) => {
     "Transaction",
     {
       costomerId: DataTypes.INTEGER,
+      shippingAddressId: DataTypes.INTEGER,
       transactionDate: DataTypes.DATE
     },
     {}
   );
   Transaction.associate = function(models) {
-    // associations can be defined here
+    Transaction.belongsTo(sequelize.models.Constumer);
   };
   return Transaction;
 };

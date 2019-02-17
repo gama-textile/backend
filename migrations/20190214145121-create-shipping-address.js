@@ -1,24 +1,39 @@
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('ShippingAddresses', {
+    return queryInterface.createTable("ShippingAddresses", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      customerId: {
+        type: Sequelize.INTEGER
+      },
+      name: {
+        type: Sequelize.STRING
+      },
+      phoneNumber: {
+        type: Sequelize.STRING
+      },
+      provinceId: {
+        type: Sequelize.INTEGER
+      },
       cityId: {
         type: Sequelize.INTEGER
       },
-      provinceId: {
+      postalCodeId: {
         type: Sequelize.INTEGER
       },
-      districtId: {
-        type: Sequelize.INTEGER
+      mainAddress: {
+        type: Sequelize.BOOLEAN
       },
-      provinceId: {
-        type: Sequelize.INTEGER
+      storeAddress: {
+        type: Sequelize.BOOLEAN
+      },
+      description: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -31,6 +46,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('ShippingAddresses');
+    return queryInterface.dropTable("ShippingAddresses");
   }
 };
