@@ -18,7 +18,7 @@ dateOfBirth
 
 ==== ShippingAddress =======
 id
-customerId
+customerId>
 name
 cityId
 provinceId

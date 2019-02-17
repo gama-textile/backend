@@ -1,11 +1,18 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
-  const Authentication = sequelize.define('Authentication', {
-    customerId: DataTypes.INTEGER,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    salt: DataTypes.STRING
-  }, {});
+  const Authentication = sequelize.define(
+    "Authentication",
+    {
+      customerId: DataTypes.INTEGER,
+      email: DataTypes.STRING,
+      password: DataTypes.STRING,
+      phoneNumber: DataTypes.STRING,
+      facebook: DataTypes.STRING,
+      salt: DataTypes.STRING,
+      lastLogin: DataTypes.DATE
+    },
+    {}
+  );
   Authentication.associate = function(models) {
     // associations can be defined here
   };
