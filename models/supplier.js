@@ -3,7 +3,8 @@ module.exports = (sequelize, DataTypes) => {
   const Supplier = sequelize.define(
     "Supplier",
     {
-      name: DataTypes.STRING
+      name: DataTypes.STRING,
+      alamat : DataTypes.STRING
     },
     {}
   );

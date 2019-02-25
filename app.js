@@ -6,7 +6,8 @@ var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-const banksROuter = require("./routes/banks");
+const banksRouter = require("./routes/banks");
+const suppliersRouter = require("./routes/suppliers");
 
 var app = express();
 
@@ -22,22 +23,22 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api", indexRouter);
 app.use("/api/users", usersRouter);
-app.use("/api/banks", banksROuter);
+app.use("/api/banks", banksRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-	next(createError(404));
+  next(createError(404));
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-	// set locals, only providing error in development
-	res.locals.message = err.message;
-	res.locals.error = req.app.get("env") === "development" ? err : {};
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get("env") === "development" ? err : {};
 
-	// render the error page
-	res.status(err.status || 500);
-	res.status(err.status || 500).json({ message: err.message });
+  // render the error page
+  res.status(err.status || 500);
+  res.status(err.status || 500).json({ message: err.message });
 });
 
 module.exports = app;
