@@ -1,7 +1,6 @@
 {
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
-  "editor.cursorStyle": "underline",
   "prettier.arrowParens": "always",
   "prettier.eslintIntegration": true,
   "prettier.jsxBracketSameLine": true,

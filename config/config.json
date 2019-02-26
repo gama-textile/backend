@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "root",
-    "password": "",
+    "username": "tio",
+    "password": "mysql",
     "database": "db_gamatextile",
     "host": "127.0.0.1",
     "dialect": "mysql"

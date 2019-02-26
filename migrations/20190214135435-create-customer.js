@@ -15,12 +15,15 @@ module.exports = {
         type: Sequelize.STRING
       },
       gender: {
+        allowNull: true,
         type: Sequelize.STRING
       },
       dateOfBirth: {
+        allowNull: true,
         type: Sequelize.DATE
       },
       phoneNumber: {
+        allowNull: true,
         type: Sequelize.STRING
       },
       createdAt: {
