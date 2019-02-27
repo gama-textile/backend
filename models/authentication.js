@@ -8,8 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       password: DataTypes.STRING,
       phoneNumber: DataTypes.STRING,
       facebook: DataTypes.STRING,
-      salt: DataTypes.STRING,
-      lastLogin: DataTypes.DATE
+      salt: DataTypes.STRING
     },
     {}
   );
