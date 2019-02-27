@@ -1,5 +1,4 @@
 const express = require("express");
-//
 const { Bank } = require("../models");
 const Op = require("sequelize").Op;
 
@@ -40,9 +39,9 @@ exports.find = (req, res) => {
    * this function get a single bank
    */
 
-  const bankid = req.params.id;
+  const bankId = req.params.id;
 
-  Bank.findOne({ where: { id: { [Op.eq]: bankid } } })
+  Bank.findOne({ where: { id: { [Op.eq]: bankId } } })
     .then((bank) => {
       res.status(200).json({ data: bank, message: "Success getting bank" });
     })
@@ -67,7 +66,7 @@ exports.update = (req, res) => {
           res.status(201).json({ data: bank, message: "Success update bank" });
         });
       } else {
-        res.status(400).json({ message: "bank not found" });
+        res.status(400).json({ message: "Bank not found" });
       }
     })
     .catch((err) => {

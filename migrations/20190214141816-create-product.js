@@ -8,17 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      // modal
-      capital: {
-        type: Sequelize.INTEGER
+      name: {
+        type: Sequelize.STRING
       },
-      price: {
-        type: Sequelize.INTEGER
-      },
-      meter: {
-        type: Sequelize.INTEGER
-      },
-      transactiondetailsId: {
+      width: {
         type: Sequelize.INTEGER
       },
       createdAt: {

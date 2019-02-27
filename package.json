@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "dev": "nodemon ./bin/www",
-    "test": "fresh migrate seed && nyc mocha --reporter mocha-simple-html-reporter --reporter-options output=test-report.html --exit && live-server test-report.html"
+    "test": "NODE_ENV=test fresh migrate seed && nyc mocha --reporter mocha-simple-html-reporter --reporter-options output=test-report.html --exit && live-server test-report.html"
   },
   "dependencies": {
     "async": "^2.6.2",
