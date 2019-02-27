@@ -1,6 +1,6 @@
 const { Authentication } = require("../models/authentication");
 const Op = require("sequelize").Op;
-const passport = require("../config/passportGmail");
+const passport = require("../auth/passportGmail");
 
 exports.gmail_link = (req, res) => {
   res.render("gmail_link");
@@ -18,5 +18,5 @@ exports.gmail_login = passport.authenticate("google", {
   failureRedirect: "/api/gmail-link"
 })),
   function(req, res) {
-    res.redirect("/api/auths/gmail-success");
+    res.redirect("/api/auth/gmail-success");
   };

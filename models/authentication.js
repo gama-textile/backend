@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
   );
   Authentication.associate = function(models) {
     // associations can be defined here
+    Authentication.belongsTo(sequelize.models.Customer, {
+      foreignKey: "customerId"
+    });
   };
   return Authentication;
 };

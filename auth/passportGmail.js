@@ -8,7 +8,7 @@ passport.use(
       clientID:
         "900213939108-s79a3rke2dqqmks9mo12cd54t65bl2u0.apps.googleusercontent.com",
       clientSecret: "scE3kuh5g6HBJY1dNA8MhgWX",
-      callbackURL: "http://localhost:3000/api/auths/google/callback",
+      callbackURL: "http://localhost:3000/api/auth/google/callback",
       profileFields: ["id", "emails", "name"]
     },
     function(accessToken, refreshToken, profile, done) {

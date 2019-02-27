@@ -8,8 +8,7 @@ passport.use(
     {
       clientID: 323544641841940,
       clientSecret: "cde32e220a26bef529f809663239e084",
-      callbackURL:
-        "http://localhost:3000/api/authentications/facebook/callback",
+      callbackURL: "http://localhost:3000/api/auth/facebook/callback",
       profileFields: ["id", "emails", "name"]
     },
     function(accessToken, refreshToken, profile, done) {

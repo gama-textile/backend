@@ -1,6 +1,6 @@
 const { Authentication } = require("../models/authentication");
 const Op = require("sequelize").Op;
-const passport = require("../auth/facebook");
+const passport = require("../auth/passportFacebook");
 
 exports.facebook_link = (req, res) => {
   res.render("facebook_link");
@@ -11,6 +11,15 @@ exports.facebook_success = (req, res) => {
 };
 
 exports.facebook_login = passport.authenticate("facebook");
+
+(exports.facebook_callback = passport.authenticate("facebook", {
+  failureRedirect: "/api/auth/facebook-link"
+})),
+  function(req, res) {
+    console.log("masuk");
+    // Successful authentication, redirect home.
+    res.redirect("/api/auth/facebook-success");
+  };
 
 // exports.gmail_login = passport.authenticate("google", {
 //   scope: ["https://www.googleapis.com/auth/plus.login", "email"]

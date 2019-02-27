@@ -13,7 +13,6 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 const banksRouter = require("./routes/banks");
 const authRouter = require("./routes/auth");
-const authenticationsRouter = require("./routes/authentication");
 
 var app = express();
 
@@ -42,8 +41,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/api", indexRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/banks", banksRouter);
-app.use("/api/auths", authRouter);
-app.use("/api/authentications", authenticationsRouter);
+app.use("/api/auth", authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
