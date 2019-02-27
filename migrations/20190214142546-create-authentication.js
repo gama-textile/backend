@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Authentications', {
+    return queryInterface.createTable("Authentications", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -17,7 +17,16 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
+      phoneNumber: {
+        type: Sequelize.STRING
+      },
+      facebook: {
+        type: Sequelize.STRING
+      },
       salt: {
+        type: Sequelize.STRING
+      },
+      lastLogin: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -31,6 +40,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Authentications');
+    return queryInterface.dropTable("Authentications");
   }
 };

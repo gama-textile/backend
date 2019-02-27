@@ -427,10 +427,10 @@ body {
                     <li class="passes">passes: <em>7</em></li>
                     <li class="pending">pending: <em>0</em></li>
                     <li class="failures">failures: <em>0</em></li>
-                    <li class="duration">duration: <em>122ms</em></li>
+                    <li class="duration">duration: <em>113ms</em></li>
                 </ul>
             </div>
-            <ul id="report"><li class="suite"><h1>/GET banks</h1><ul><li class="test pass medium"><h2>It should get all banks<span class="duration">65ms</span></h2><pre><code>chai
+            <ul id="report"><li class="suite"><h1>/GET banks</h1><ul><li class="test pass medium"><h2>It should get all banks<span class="duration">52ms</span></h2><pre><code>chai
 &#x9;.request(app)
 &#x9;.get(&#x22;/api/banks&#x22;)
 &#x9;.end((err, res) =&#x3E; {
@@ -440,7 +440,7 @@ body {
 &#x9;&#x9;expect(res.body.message).to.equal(&#x22;Success read all banks&#x22;);
 &#x9;&#x9;expect(res.body).to.have.property(&#x22;data&#x22;);
 &#x9;&#x9;done();
-&#x9;});</code></pre></li></ul></li><li class="suite"><h1>/POST banks</h1><ul><li class="test pass fast"><h2>It sould post the banks info<span class="duration">25ms</span></h2><pre><code>chai
+&#x9;});</code></pre></li></ul></li><li class="suite"><h1>/POST banks</h1><ul><li class="test pass fast"><h2>It sould post the banks info<span class="duration">29ms</span></h2><pre><code>chai
 &#x9;.request(app)
 &#x9;.post(&#x22;/api/banks&#x22;)
 &#x9;.send({ name, nomorRekening })
@@ -475,7 +475,7 @@ body {
 &#x9;&#x9;name = res.body.data.name;
 &#x9;&#x9;nomorRekening = res.body.data.nomorRekening;
 &#x9;&#x9;done();
-&#x9;});</code></pre></li><li class="test pass fast"><h2>Should update bank in database<span class="duration">1ms</span></h2><pre><code>Bank.findOne({
+&#x9;});</code></pre></li><li class="test pass fast"><h2>Should update bank in database<span class="duration">2ms</span></h2><pre><code>Bank.findOne({
 &#x9;where: {
 &#x9;&#x9;id: bankId
 &#x9;}
@@ -483,7 +483,7 @@ body {
 &#x9;expect(bank.name).to.equal(name);
 &#x9;expect(bank.nomorRekening).to.equal(nomorRekening);
 &#x9;done();
-});</code></pre></li></ul></li><li class="suite"><h1>/DELETE/:id bank</h1><ul><li class="test pass fast"><h2>Should delete a bank<span class="duration">6ms</span></h2><pre><code>chai
+});</code></pre></li></ul></li><li class="suite"><h1>/DELETE/:id bank</h1><ul><li class="test pass fast"><h2>Should delete a bank<span class="duration">8ms</span></h2><pre><code>chai
 &#x9;.request(app)
 &#x9;.del(&#x60;/api/banks/${bankId}&#x60;)
 &#x9;.end((err, res) =&#x3E; {

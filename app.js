@@ -3,16 +3,34 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+// tambahan fb
+var session = require("express-session");
+var hbs = require("express-handlebars");
+var passport = require("passport");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 const banksRouter = require("./routes/banks");
+const authenticationsRouter = require("./routes/authentication");
 
 var app = express();
 
+// tambah fb
+app.use(
+  session({
+    secret: "s3cr3t",
+    resave: true,
+    saveUninitialized: true
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+
 // view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "pug");
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -23,6 +41,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/api", indexRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/banks", banksRouter);
+app.use("/api/authentications", authenticationsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
