@@ -4,6 +4,8 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var session = require("express-session");
 var logger = require("morgan");
+// tambahan fb
+var session = require("express-session");
 var hbs = require("express-handlebars");
 var passport = require("passport");
 
@@ -11,6 +13,7 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 const banksRouter = require("./routes/banks");
 const authRouter = require("./routes/auth");
+const authenticationsRouter = require("./routes/authentication");
 
 var app = express();
 
@@ -40,6 +43,7 @@ app.use("/api", indexRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/banks", banksRouter);
 app.use("/api/auths", authRouter);
+app.use("/api/authentications", authenticationsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,63 @@
+Arguments: 
+  /usr/bin/node /usr/share/yarn/bin/yarn.js add pug
+
+PATH: 
+  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+Yarn version: 
+  1.13.0
+
+Node version: 
+  10.15.1
+
+Platform: 
+  linux x64
+
+Trace: 
+  SyntaxError: Unknown token: { line: 1, col: 0, type: 'INVALID', value: undefined } 1:0 in /home/elfin/.yarnrc
+      at Parser.unexpected (/usr/share/yarn/lib/cli.js:63211:11)
+      at Parser.parse (/usr/share/yarn/lib/cli.js:63342:14)
+      at parse (/usr/share/yarn/lib/cli.js:63413:17)
+      at module.exports.exports.default (/usr/share/yarn/lib/cli.js:62982:96)
+      at YarnRegistry.<anonymous> (/usr/share/yarn/lib/cli.js:95545:64)
+      at Generator.next (<anonymous>)
+      at step (/usr/share/yarn/lib/cli.js:304:30)
+      at /usr/share/yarn/lib/cli.js:315:13
+
+npm manifest: 
+  {
+    "name": "gt-react",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+      "start": "nodemon ./bin/www",
+      "dev": "nodemon ./bin/www",
+      "test": "fresh migrate seed && nyc mocha --reporter mocha-simple-html-reporter --reporter-options output=test-report.html --exit && live-server test-report.html"
+    },
+    "dependencies": {
+      "bcrypt": "^3.0.4",
+      "chai": "^4.2.0",
+      "chai-http": "^4.2.1",
+      "cookie-parser": "~1.4.3",
+      "debug": "~2.6.9",
+      "express": "~4.16.0",
+      "fresh_sequelize": "^1.0.2",
+      "http-errors": "~1.6.2",
+      "jsonwebtoken": "^8.5.0",
+      "live-server": "^1.2.1",
+      "morgan": "~1.9.0",
+      "mysql2": "^1.6.5",
+      "sequelize": "^4.42.0"
+    },
+    "devDependencies": {
+      "mocha": "^6.0.1",
+      "mocha-simple-html-reporter": "^1.1.0",
+      "nyc": "^13.3.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

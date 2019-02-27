@@ -28,6 +28,9 @@ module.exports = {
       salt: {
         type: Sequelize.STRING
       },
+      lastLogin: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
