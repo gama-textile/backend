@@ -13,3 +13,10 @@ exports.gmail_success = (req, res) => {
 exports.gmail_login = passport.authenticate("google", {
   scope: ["https://www.googleapis.com/auth/plus.login", "email"]
 });
+
+(exports.gmail_callback = passport.authenticate("google", {
+  failureRedirect: "/api/gmail-link"
+})),
+  function(req, res) {
+    res.redirect("/api/auths/gmail-success");
+  };
