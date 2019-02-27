@@ -6,7 +6,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT
       },
       firstName: {
         type: Sequelize.STRING
@@ -21,10 +21,6 @@ module.exports = {
       dateOfBirth: {
         allowNull: true,
         type: Sequelize.DATE
-      },
-      phoneNumber: {
-        allowNull: true,
-        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
