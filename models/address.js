@@ -3,17 +3,21 @@ module.exports = (sequelize, DataTypes) => {
   const Address = sequelize.define(
     "Address",
     {
-      address: DataTypes.STRING,
-      province: DataTypes.STRING,
-      city: DataTypes.STRING,
-      district: DataTypes.STRING,
-      postalCode: DataTypes.INTEGER,
-      phoneNumber: DataTypes.STRING
+      name: DataTypes.STRING,
+      phoneNumber: DataTypes.STRING,
+      mainAddress: DataTypes.BOOLEAN,
+      storeAddress: DataTypes.BOOLEAN,
+      description: DataTypes.STRING,
+      latitude: DataTypes.DOUBLE,
+      longitude: DataTypes.DOUBLE,
+      customerId: DataTypes.INTEGER,
+      cityId: DataTypes.INTEGER,
+      provinceId: DataTypes.INTEGER,
+      districtId: DataTypes.INTEGER,
+      postalCodeId: DataTypes.INTEGER
     },
     {}
   );
-  Address.associate = function(models) {
-    // associations can be defined here
-  };
+  Address.associate = function(models) {};
   return Address;
 };
