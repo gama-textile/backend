@@ -424,13 +424,80 @@ body {
                     <li><span id="toggle-passes" class="toggle-passes">show failures only</span></li>
                 </ul>
                 <ul class="mocha-stats">
-                    <li class="passes">passes: <em>14</em></li>
+                    <li class="passes">passes: <em>16</em></li>
                     <li class="pending">pending: <em>0</em></li>
-                    <li class="failures">failures: <em>0</em></li>
-                    <li class="duration">duration: <em>148ms</em></li>
+                    <li class="failures">failures: <em>2</em></li>
+                    <li class="duration">duration: <em>3s</em></li>
                 </ul>
             </div>
-            <ul id="report"><li class="suite"><h1>/GET banks</h1><ul><li class="test pass medium"><h2>It should get all banks<span class="duration">54ms</span></h2><pre><code>chai
+            <ul id="report"><li class="suite"><h1>/Address CRUD</h1><ul><li class="test pass slow"><h2>Should insert address into database<span class="duration">896ms</span></h2><pre><code>chai
+  .request(app)
+  .post(&#x22;/api/addresses&#x22;)
+  .send(address)
+  .end((err, res) =&#x3E; {
+    expect(res).to.have.status(200);
+    expect(res).to.be.json;
+    expect(res.body).to.have.property(&#x22;message&#x22;);
+    expect(res.body).to.have.property(&#x22;data&#x22;);
+    addressId = res.body.data.id;
+    done();
+  });</code></pre></li><li class="test fail"><h2>Should get the inserted address</h2><pre><code>chai
+  .request(app)
+  .get(&#x60;/api/addresses/${addressId}&#x60;)
+  .end((err, res) =&#x3E; {
+    expect(res.data.address.name).to.equal(address.name);
+    expect(res.data.address.phoneNumber).to.equal(address.phoneNumber);
+    expect(res.data.address.description).to.equal(address.description);
+    expect(res.data.address.storeAddress).to.equal(address.storeAddress);
+    expect(res.data.address.mainAddress).to.equal(address.mainAddress);
+    expect(res.data.address.latitude).to.equal(address.latitude);
+    expect(res.data.address.longitude).to.equal(address.longitude);
+    expect(res.data.address.customerId).to.equal(address.customerId);
+    expect(res.data.address.cityId).to.equal(address.cityId);
+    expect(res.data.address.provinceId).to.equal(address.provinceId);
+    expect(res.data.address.districtId).to.equal(address.districtId);
+    expect(res.data.address.postalCodeId).to.equal(address.postalCodeId);
+    done();
+  });</code></pre><pre class="error">TypeError: Cannot read property &#x27;address&#x27; of undefined
+    at chai.request.get.end (test/addressesTest.js:67:25)
+    at Test.Request.callback (node_modules/superagent/lib/node/index.js:716:12)
+    at parser (node_modules/superagent/lib/node/index.js:916:18)
+    at IncomingMessage.res.on (node_modules/superagent/lib/node/parsers/json.js:19:7)
+    at endReadableNT (_stream_readable.js:1129:12)
+    at processTicksAndRejections (internal/process/next_tick.js:76:17)</pre></li><li class="test fail"><h2>Should update the insertedd address</h2><pre><code>chai
+  .request(app)
+  .put(&#x60;/api/addresses/${addressId}&#x60;)
+  .send(updatedAddress)
+  .end((err, res) =&#x3E; {
+    expect(res.data.address.name).to.equal(&#x22;Alamat Rumah Ku&#x22;);
+    expect(res.data.address.phoneNumber).to.equal(address.phoneNumber);
+    expect(res.data.address.description).to.equal(address.description);
+    expect(res.data.address.storeAddress).to.equal(address.storeAddress);
+    expect(res.data.address.mainAddress).to.equal(address.mainAddress);
+    expect(res.data.address.latitude).to.equal(address.latitude);
+    expect(res.data.address.longitude).to.equal(address.longitude);
+    expect(res.data.address.customerId).to.equal(address.customerId);
+    expect(res.data.address.cityId).to.equal(address.cityId);
+    expect(res.data.address.provinceId).to.equal(address.provinceId);
+    expect(res.data.address.districtId).to.equal(address.districtId);
+    expect(res.data.address.postalCodeId).to.equal(address.postalCodeId);
+    done();
+  });</code></pre><pre class="error">TypeError: Cannot read property &#x27;address&#x27; of undefined
+    at chai.request.put.send.end (test/addressesTest.js:90:25)
+    at Test.Request.callback (node_modules/superagent/lib/node/index.js:716:12)
+    at parser (node_modules/superagent/lib/node/index.js:916:18)
+    at IncomingMessage.res.on (node_modules/superagent/lib/node/parsers/json.js:19:7)
+    at endReadableNT (_stream_readable.js:1129:12)
+    at processTicksAndRejections (internal/process/next_tick.js:76:17)</pre></li><li class="test pass slow"><h2>Delete the updated address<span class="duration">119ms</span></h2><pre><code>chai
+  .request(app)
+  .del(&#x60;/api/addresses/${addressId}&#x60;)
+  .end((err, res) =&#x3E; {
+    expect(res).to.have.status(200);
+    expect(res).to.be.json;
+    expect(res.body).to.have.property(&#x22;data&#x22;);
+    expect(res.body).to.have.property(&#x22;message&#x22;);
+    done();
+  });</code></pre></li></ul></li><li class="suite"><h1>/GET banks</h1><ul><li class="test pass medium"><h2>It should get all banks<span class="duration">68ms</span></h2><pre><code>chai
 &#x9;.request(app)
 &#x9;.get(&#x22;/api/banks&#x22;)
 &#x9;.end((err, res) =&#x3E; {
@@ -440,7 +507,7 @@ body {
 &#x9;&#x9;expect(res.body.message).to.equal(&#x22;Success read all banks&#x22;);
 &#x9;&#x9;expect(res.body).to.have.property(&#x22;data&#x22;);
 &#x9;&#x9;done();
-&#x9;});</code></pre></li></ul></li><li class="suite"><h1>/POST banks</h1><ul><li class="test pass fast"><h2>It sould post the banks info<span class="duration">30ms</span></h2><pre><code>chai
+&#x9;});</code></pre></li></ul></li><li class="suite"><h1>/POST banks</h1><ul><li class="test pass medium"><h2>It sould post the banks info<span class="duration">62ms</span></h2><pre><code>chai
 &#x9;.request(app)
 &#x9;.post(&#x22;/api/banks&#x22;)
 &#x9;.send({ name, nomorRekening })
@@ -454,7 +521,7 @@ body {
 &#x9;&#x9;name = res.body.data.name;
 &#x9;&#x9;nomorRekening = res.body.data.nomorRekening;
 &#x9;&#x9;done();
-&#x9;});</code></pre></li><li class="test pass fast"><h2>Should create bank in database<span class="duration">4ms</span></h2><pre><code>Bank.findOne({
+&#x9;});</code></pre></li><li class="test pass slow"><h2>Should create bank in database<span class="duration">121ms</span></h2><pre><code>Bank.findOne({
 &#x9;where: {
 &#x9;&#x9;id: bankId
 &#x9;}
@@ -462,7 +529,7 @@ body {
 &#x9;expect(bank.name).to.equal(name);
 &#x9;expect(bank.nomorRekening).to.equal(nomorRekening);
 &#x9;done();
-});</code></pre></li></ul></li><li class="suite"><h1>/PUT/:id bank</h1><ul><li class="test pass fast"><h2>should update bank info<span class="duration">11ms</span></h2><pre><code>chai
+});</code></pre></li></ul></li><li class="suite"><h1>/PUT/:id bank</h1><ul><li class="test pass slow"><h2>should update bank info<span class="duration">158ms</span></h2><pre><code>chai
 &#x9;.request(app)
 &#x9;.put(&#x60;/api/bankS/${bankId}&#x60;)
 &#x9;.send({ name: &#x22;BCA&#x22;, nomorRekening: &#x22;009-002-001&#x22; })
@@ -475,7 +542,7 @@ body {
 &#x9;&#x9;name = res.body.data.name;
 &#x9;&#x9;nomorRekening = res.body.data.nomorRekening;
 &#x9;&#x9;done();
-&#x9;});</code></pre></li><li class="test pass fast"><h2>Should update bank in database<span class="duration">2ms</span></h2><pre><code>Bank.findOne({
+&#x9;});</code></pre></li><li class="test pass fast"><h2>Should update bank in database<span class="duration">12ms</span></h2><pre><code>Bank.findOne({
 &#x9;where: {
 &#x9;&#x9;id: bankId
 &#x9;}
@@ -483,7 +550,7 @@ body {
 &#x9;expect(bank.name).to.equal(name);
 &#x9;expect(bank.nomorRekening).to.equal(nomorRekening);
 &#x9;done();
-});</code></pre></li></ul></li><li class="suite"><h1>/DELETE/:id bank</h1><ul><li class="test pass fast"><h2>Should delete a bank<span class="duration">8ms</span></h2><pre><code>chai
+});</code></pre></li></ul></li><li class="suite"><h1>/DELETE/:id bank</h1><ul><li class="test pass slow"><h2>Should delete a bank<span class="duration">228ms</span></h2><pre><code>chai
 &#x9;.request(app)
 &#x9;.del(&#x60;/api/banks/${bankId}&#x60;)
 &#x9;.end((err, res) =&#x3E; {
@@ -493,14 +560,14 @@ body {
 &#x9;&#x9;expect(res.body.message).to.equal(&#x22;Success delete bank&#x22;);
 &#x9;&#x9;expect(res.body).to.have.property(&#x22;data&#x22;);
 &#x9;&#x9;done();
-&#x9;});</code></pre></li><li class="test pass fast"><h2>Should delete bank in database<span class="duration">2ms</span></h2><pre><code>Bank.findOne({
+&#x9;});</code></pre></li><li class="test pass fast"><h2>Should delete bank in database<span class="duration">28ms</span></h2><pre><code>Bank.findOne({
 &#x9;where: {
 &#x9;&#x9;id: bankId
 &#x9;}
 }).then((bank) =&#x3E; {
 &#x9;expect(bank).to.equal(null);
 &#x9;done();
-});</code></pre></li></ul></li><li class="suite"><h1>/GET product</h1><ul><li class="test pass fast"><h2>It should get all product<span class="duration">4ms</span></h2><pre><code>chai
+});</code></pre></li></ul></li><li class="suite"><h1>/GET product</h1><ul><li class="test pass fast"><h2>It should get all product<span class="duration">31ms</span></h2><pre><code>chai
   .request(app)
   .get(&#x22;/api/products&#x22;)
   .end((err, res) =&#x3E; {
@@ -510,7 +577,7 @@ body {
     expect(res.body.message).to.equal(&#x22;Success read all products&#x22;);
     expect(res.body).to.have.property(&#x22;data&#x22;);
     done();
-  });</code></pre></li></ul></li><li class="suite"><h1>/POST product</h1><ul><li class="test pass fast"><h2>It sould post the product info<span class="duration">5ms</span></h2><pre><code>chai
+  });</code></pre></li></ul></li><li class="suite"><h1>/POST product</h1><ul><li class="test pass slow"><h2>It sould post the product info<span class="duration">231ms</span></h2><pre><code>chai
   .request(app)
   .post(&#x22;/api/products&#x22;)
   .send({ name, width })
@@ -525,7 +592,7 @@ body {
     console.log(name);
     width = res.body.data.width;
     done();
-  });</code></pre></li><li class="test pass fast"><h2>Should create product in database<span class="duration">3ms</span></h2><pre><code>console.log(productId);
+  });</code></pre></li><li class="test pass fast"><h2>Should create product in database<span class="duration">4ms</span></h2><pre><code>console.log(productId);
 Product.findOne({
   where: {
     id: productId
@@ -534,7 +601,7 @@ Product.findOne({
   expect(product.name).to.equal(name);
   expect(product.width).to.equal(width);
   done();
-});</code></pre></li></ul></li><li class="suite"><h1>/PUT/:id product</h1><ul><li class="test pass fast"><h2>should update product info<span class="duration">8ms</span></h2><pre><code>chai
+});</code></pre></li></ul></li><li class="suite"><h1>/PUT/:id product</h1><ul><li class="test pass slow"><h2>should update product info<span class="duration">229ms</span></h2><pre><code>chai
   .request(app)
   .put(&#x60;/api/products/${productId}&#x60;)
   .send({ name: &#x22;kain ubah&#x22;, width: 11 })
@@ -547,7 +614,7 @@ Product.findOne({
     name = res.body.data.name;
     width = res.body.data.width;
     done();
-  });</code></pre></li><li class="test pass fast"><h2>Should update product in database<span class="duration">2ms</span></h2><pre><code>Product.findOne({
+  });</code></pre></li><li class="test pass fast"><h2>Should update product in database<span class="duration">4ms</span></h2><pre><code>Product.findOne({
   where: {
     id: productId
   }
@@ -555,7 +622,7 @@ Product.findOne({
   expect(product.name).to.equal(name);
   expect(product.width).to.equal(width);
   done();
-});</code></pre></li></ul></li><li class="suite"><h1>/DELETE/:id product</h1><ul><li class="test pass fast"><h2>Should delete a product<span class="duration">6ms</span></h2><pre><code>chai
+});</code></pre></li></ul></li><li class="suite"><h1>/DELETE/:id product</h1><ul><li class="test pass slow"><h2>Should delete a product<span class="duration">177ms</span></h2><pre><code>chai
   .request(app)
   .del(&#x60;/api/products/${productId}&#x60;)
   .end((err, res) =&#x3E; {
@@ -565,7 +632,7 @@ Product.findOne({
     expect(res.body.message).to.equal(&#x22;Success delete product&#x22;);
     expect(res.body).to.have.property(&#x22;data&#x22;);
     done();
-  });</code></pre></li><li class="test pass fast"><h2>Should delete product in database<span class="duration">1ms</span></h2><pre><code>Product.findOne({
+  });</code></pre></li><li class="test pass fast"><h2>Should delete product in database<span class="duration">3ms</span></h2><pre><code>Product.findOne({
   where: {
     id: productId
   }
