@@ -4,16 +4,16 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var session = require("express-session");
 var logger = require("morgan");
-// tambahan fb
 var session = require("express-session");
-var hbs = require("express-handlebars");
 var passport = require("passport");
+const fileUpload = require("express-fileupload");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 const banksRouter = require("./routes/banks");
 const authRouter = require("./routes/auth");
 const productsRouter = require("./routes/products");
+const suppliersRouter = require("./routes/suppliers");
 
 var app = express();
 
@@ -38,12 +38,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(fileUpload);
 
 app.use("/api", indexRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/banks", banksRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/products/", productsRouter);
+app.use("/api/suppliers", suppliersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

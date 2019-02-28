@@ -1,6 +1,7 @@
 const express = require("express");
 const { Product } = require("../models");
 const Op = require("sequelize").Op;
+const fs = require("fs");
 
 exports.index = (req, res) => {
   /*
@@ -24,17 +25,34 @@ exports.create = (req, res) => {
    * POST api/products
    * this function add products
    */
-  const { name, width } = req.body;
-  Product.create({ name, width })
-    .then((products) => {
-      res
-        .status(201)
-        .json({ data: products, message: "Success create data product" });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({ message: "Internal server error" });
-    });
+  if (Object.keys(req.files).length == 0) {
+    return res.status(400).json({ message: "No files were uploaded." });
+  }
+
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  let sampleFile = req.files.imageUrl;
+
+  // Use the mv() method to place the file somewhere on your server
+  sampleFile.mv("/home/Elfin/filename.jpg", function(err) {
+    if (err) return res.status(500).json({ err: "dsfa" });
+
+    res.send("File uploaded!");
+  });
+  // const { name, width } = req.body;
+  // if (Object.keys(req.files).length == 0) {
+  //   console.log("fuck");
+  //   return res.status(400).json({ message: "No files were uploaded." });
+  // }
+  // // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  // let sampleFile = req.files.imageUrl;
+  // console.log("fuck");
+  // // __basedir + '/resources/static/assets/uploads/'
+  // // Use the mv() method to place the file somewhere on your server
+  // sampleFile.mv("home/Elfin/filename.jpg", function(err) {
+  //   if (err) return res.status(500).json(err);
+  //   console.log("fuck");
+  //   res.send("File uploaded!");
+  // });
 };
 
 exports.find = (req, res) => {
@@ -62,12 +80,12 @@ exports.update = (req, res) => {
    * Update single product
    */
   const productId = req.params.id;
-  const { name, width } = req.body;
+  const { name, width, imageUrl } = req.body;
 
   Product.findOne({ where: { id: { [Op.eq]: productId } } })
     .then((product) => {
       if (product) {
-        return product.update({ name, width }).then((product) => {
+        return product.update({ name, width, imageUrl }).then((product) => {
           res
             .status(201)
             .json({ data: product, message: "Success update product" });
@@ -104,3 +122,27 @@ exports.destroy = (req, res) => {
       res.status(500).json({ message: "Internal server error" });
     });
 };
+
+// const fs = require('fs');
+
+// const db = require('../config/db.config.js');
+// const Image = db.images;
+
+// // Upload a Multipart-File then saving it to MySQL database
+// exports.upload = (req, res) => {
+// 	Image.create({
+// 		type: req.file.mimetype,
+// 		name: req.file.originalname,
+// 		data: fs.readFileSync(__basedir + '/resources/static/assets/uploads/' + req.file.filename)
+// 	}).then(image => {
+// 		try{
+// 			fs.writeFileSync(__basedir + '/resources/static/assets/tmp/' + image.name, image.data);
+
+// 			// exit node.js app
+// 			res.json({'msg': 'File uploaded successfully!', 'file': req.file});
+// 		}catch(e){
+// 			console.log(e);
+// 			res.json({'err': e});
+// 		}
+// 	})
+// };
