@@ -13,11 +13,8 @@ var usersRouter = require("./routes/users");
 const banksRouter = require("./routes/banks");
 const authRouter = require("./routes/auth");
 const productsRouter = require("./routes/products");
-<<<<<<< HEAD
 const suppliersRouter = require("./routes/suppliers");
-=======
 var addressRouter = require("./routes/addresses");
->>>>>>> 2b4ea61dd4e0bd91132445ad9fe5bd2c07cb982d
 
 var app = express();
 
@@ -42,18 +39,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(fileUpload);
+app.use(fileUpload());
 
 app.use("/api", indexRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/banks", banksRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/products/", productsRouter);
-<<<<<<< HEAD
 app.use("/api/suppliers", suppliersRouter);
-=======
 app.use("/api/addresses", addressRouter);
->>>>>>> 2b4ea61dd4e0bd91132445ad9fe5bd2c07cb982d
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
