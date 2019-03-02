@@ -12,7 +12,7 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 const banksRouter = require("./routes/banks");
 const authRouter = require("./routes/auth");
-const productsRouter = require("./routes/products");
+const productsRouter = require("./routes/product");
 const suppliersRouter = require("./routes/suppliers");
 var addressRouter = require("./routes/addresses");
 

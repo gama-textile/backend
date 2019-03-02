@@ -3,6 +3,7 @@ const router = express.Router();
 const multer = require("multer");
 const { Product } = require("../models");
 const Op = require("sequelize").Op;
+
 const {
   index,
   upload,
@@ -18,6 +19,24 @@ router.put("/:id", update);
 router.delete("/:id", destroy);
 
 module.exports = router;
+// const multer = require("multer");
+
+// var storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, __basedir + "/public/");
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, file.fieldname + "-" + Date.now() + "-" + file.originalname);
+//   }
+// });
+
+// var upload = multer({ storage: storage });
+
+// router.post("/", upload.single("uploadfile"), (req, res) => {
+//   console.log(req.file);
+
+//   res.json({ msg: "File uploaded successfully!", file: req.file });
+// });
 
 // module.exports = function(app) {
 //   const multer = require("multer");

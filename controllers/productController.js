@@ -20,18 +20,13 @@ exports.index = (req, res) => {
     });
 };
 
-// exports.create = (req, res) => {
-/*
- * POST api/products
- * this function add products
- */
-// const fs = require("fs");
-
-// const db = require('../config/db.config.js');
-// const Image = db.images;
-
-// Upload a Multipart-File then saving it to MySQL database
 exports.upload = (req, res) => {
+  /*
+   * POST api/products
+   * this function add products and upload file
+   */
+
+  // Upload a Multipart-File then saving it to MySQL database
   let sampleFile;
   let uploadPath;
 
@@ -56,7 +51,7 @@ exports.upload = (req, res) => {
     }
     Product.create({ name, width, imageUrl: uploadPath })
       .then((product) => {
-        res.status(200).json({ message: "File uploaded to " });
+        res.status(200).json({ message: "File uploaded to" });
       })
       .catch((err) => {
         console.log(err);
