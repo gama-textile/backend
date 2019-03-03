@@ -1,8 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
-const { Product } = require("../models");
-const Op = require("sequelize").Op;
 
 const {
   index,
@@ -19,6 +16,7 @@ router.put("/:id", update);
 router.delete("/:id", destroy);
 
 module.exports = router;
+
 // const multer = require("multer");
 
 // var storage = multer.diskStorage({
