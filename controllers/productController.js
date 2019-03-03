@@ -1,7 +1,5 @@
-const express = require("express");
 const { Product } = require("../models");
 const Op = require("sequelize").Op;
-const fs = require("fs");
 
 exports.index = (req, res) => {
   /*

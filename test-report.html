@@ -427,10 +427,10 @@ body {
                     <li class="passes">passes: <em>23</em></li>
                     <li class="pending">pending: <em>0</em></li>
                     <li class="failures">failures: <em>0</em></li>
-                    <li class="duration">duration: <em>230ms</em></li>
+                    <li class="duration">duration: <em>206ms</em></li>
                 </ul>
             </div>
-            <ul id="report"><li class="suite"><h1>/Address CRUD</h1><ul><li class="test pass medium"><h2>Should insert address into database<span class="duration">62ms</span></h2><pre><code>chai
+            <ul id="report"><li class="suite"><h1>/Address CRUD</h1><ul><li class="test pass medium"><h2>Should insert address into database<span class="duration">57ms</span></h2><pre><code>chai
   .request(app)
   .post(&#x22;/api/addresses&#x22;)
   .send(address)
@@ -441,7 +441,7 @@ body {
     expect(res.body).to.have.property(&#x22;data&#x22;);
     addressId = res.body.data.id;
     done();
-  });</code></pre></li><li class="test pass fast"><h2>GET SINGLE ADDRESS<span class="duration">11ms</span></h2><pre><code>chai
+  });</code></pre></li><li class="test pass fast"><h2>GET SINGLE ADDRESS<span class="duration">8ms</span></h2><pre><code>chai
   .request(app)
   .get(&#x60;/api/addresses/${addressId}&#x60;)
   .end((err, res) =&#x3E; {
@@ -458,7 +458,7 @@ body {
     expect(res.body.data.districtId).to.equal(address.districtId);
     expect(res.body.data.postalCodeId).to.equal(address.postalCodeId);
     done();
-  });</code></pre></li><li class="test pass fast"><h2>Should update the insertedd address<span class="duration">17ms</span></h2><pre><code>chai
+  });</code></pre></li><li class="test pass fast"><h2>Should update the insertedd address<span class="duration">16ms</span></h2><pre><code>chai
   .request(app)
   .put(&#x60;/api/addresses/${addressId}&#x60;)
   .send(updatedAddress)
@@ -476,7 +476,7 @@ body {
     expect(res.body.data.districtId).to.equal(address.districtId);
     expect(res.body.data.postalCodeId).to.equal(address.postalCodeId);
     done();
-  });</code></pre></li><li class="test pass fast"><h2>Delete the updated address<span class="duration">15ms</span></h2><pre><code>chai
+  });</code></pre></li><li class="test pass fast"><h2>Delete the updated address<span class="duration">7ms</span></h2><pre><code>chai
   .request(app)
   .del(&#x60;/api/addresses/${addressId}&#x60;)
   .end((err, res) =&#x3E; {
@@ -485,7 +485,7 @@ body {
     expect(res.body).to.have.property(&#x22;data&#x22;);
     expect(res.body).to.have.property(&#x22;message&#x22;);
     done();
-  });</code></pre></li></ul></li><li class="suite"><h1>/GET banks</h1><ul><li class="test pass fast"><h2>It should get all banks<span class="duration">5ms</span></h2><pre><code>chai
+  });</code></pre></li></ul></li><li class="suite"><h1>/GET banks</h1><ul><li class="test pass fast"><h2>It should get all banks<span class="duration">4ms</span></h2><pre><code>chai
 &#x9;.request(app)
 &#x9;.get(&#x22;/api/banks&#x22;)
 &#x9;.end((err, res) =&#x3E; {
@@ -495,7 +495,7 @@ body {
 &#x9;&#x9;expect(res.body.message).to.equal(&#x22;Success read all banks&#x22;);
 &#x9;&#x9;expect(res.body).to.have.property(&#x22;data&#x22;);
 &#x9;&#x9;done();
-&#x9;});</code></pre></li></ul></li><li class="suite"><h1>/POST banks</h1><ul><li class="test pass fast"><h2>It sould post the banks info<span class="duration">8ms</span></h2><pre><code>chai
+&#x9;});</code></pre></li></ul></li><li class="suite"><h1>/POST banks</h1><ul><li class="test pass fast"><h2>It sould post the banks info<span class="duration">6ms</span></h2><pre><code>chai
 &#x9;.request(app)
 &#x9;.post(&#x22;/api/banks&#x22;)
 &#x9;.send({ name, nomorRekening })
@@ -509,7 +509,7 @@ body {
 &#x9;&#x9;name = res.body.data.name;
 &#x9;&#x9;nomorRekening = res.body.data.nomorRekening;
 &#x9;&#x9;done();
-&#x9;});</code></pre></li><li class="test pass fast"><h2>Should create bank in database<span class="duration">2ms</span></h2><pre><code>Bank.findOne({
+&#x9;});</code></pre></li><li class="test pass fast"><h2>Should create bank in database<span class="duration">3ms</span></h2><pre><code>Bank.findOne({
 &#x9;where: {
 &#x9;&#x9;id: bankId
 &#x9;}
@@ -517,7 +517,7 @@ body {
 &#x9;expect(bank.name).to.equal(name);
 &#x9;expect(bank.nomorRekening).to.equal(nomorRekening);
 &#x9;done();
-});</code></pre></li></ul></li><li class="suite"><h1>/PUT/:id bank</h1><ul><li class="test pass fast"><h2>should update bank info<span class="duration">7ms</span></h2><pre><code>chai
+});</code></pre></li></ul></li><li class="suite"><h1>/PUT/:id bank</h1><ul><li class="test pass fast"><h2>should update bank info<span class="duration">10ms</span></h2><pre><code>chai
 &#x9;.request(app)
 &#x9;.put(&#x60;/api/bankS/${bankId}&#x60;)
 &#x9;.send({ name: &#x22;BCA&#x22;, nomorRekening: &#x22;009-002-001&#x22; })
@@ -530,7 +530,7 @@ body {
 &#x9;&#x9;name = res.body.data.name;
 &#x9;&#x9;nomorRekening = res.body.data.nomorRekening;
 &#x9;&#x9;done();
-&#x9;});</code></pre></li><li class="test pass fast"><h2>Should update bank in database<span class="duration">1ms</span></h2><pre><code>Bank.findOne({
+&#x9;});</code></pre></li><li class="test pass fast"><h2>Should update bank in database<span class="duration">2ms</span></h2><pre><code>Bank.findOne({
 &#x9;where: {
 &#x9;&#x9;id: bankId
 &#x9;}
@@ -538,7 +538,7 @@ body {
 &#x9;expect(bank.name).to.equal(name);
 &#x9;expect(bank.nomorRekening).to.equal(nomorRekening);
 &#x9;done();
-});</code></pre></li></ul></li><li class="suite"><h1>/DELETE/:id bank</h1><ul><li class="test pass fast"><h2>Should delete a bank<span class="duration">7ms</span></h2><pre><code>chai
+});</code></pre></li></ul></li><li class="suite"><h1>/DELETE/:id bank</h1><ul><li class="test pass fast"><h2>Should delete a bank<span class="duration">8ms</span></h2><pre><code>chai
 &#x9;.request(app)
 &#x9;.del(&#x60;/api/banks/${bankId}&#x60;)
 &#x9;.end((err, res) =&#x3E; {
@@ -555,7 +555,7 @@ body {
 }).then((bank) =&#x3E; {
 &#x9;expect(bank).to.equal(null);
 &#x9;done();
-});</code></pre></li></ul></li><li class="suite"><h1>/PostalCode CRUD</h1><ul><li class="test pass fast"><h2>Should insert postalCode into database<span class="duration">6ms</span></h2><pre><code>chai
+});</code></pre></li></ul></li><li class="suite"><h1>/PostalCode CRUD</h1><ul><li class="test pass fast"><h2>Should insert postalCode into database<span class="duration">5ms</span></h2><pre><code>chai
   .request(app)
   .post(&#x22;/api/postalcodes&#x22;)
   .send(postalCode)
@@ -572,7 +572,7 @@ body {
   .end((err, res) =&#x3E; {
     expect(res.body.data.name).to.equal(postalCode.name);
     done();
-  });</code></pre></li><li class="test pass fast"><h2>Should update the insertedd postalCode<span class="duration">8ms</span></h2><pre><code>chai
+  });</code></pre></li><li class="test pass fast"><h2>Should update the insertedd postalCode<span class="duration">9ms</span></h2><pre><code>chai
   .request(app)
   .put(&#x60;/api/postalcodes/${postalCodeId}&#x60;)
   .send(updatedpostalcode)
@@ -609,7 +609,7 @@ body {
     expect(res.body.message).to.equal(&#x22;Success read all suppliers&#x22;);
     expect(res.body).to.have.property(&#x22;data&#x22;);
     done();
-  });</code></pre></li></ul></li><li class="suite"><h1>/POST supplier</h1><ul><li class="test pass fast"><h2>It sould post the supplier info<span class="duration">10ms</span></h2><pre><code>chai
+  });</code></pre></li></ul></li><li class="suite"><h1>/POST supplier</h1><ul><li class="test pass fast"><h2>It sould post the supplier info<span class="duration">6ms</span></h2><pre><code>chai
   .request(app)
   .post(&#x22;/api/suppliers&#x22;)
   .send({ name, alamat })
@@ -644,7 +644,7 @@ body {
     name = res.body.data.name;
     alamat = res.body.data.alamat;
     done();
-  });</code></pre></li><li class="test pass fast"><h2>Should update supplier in database<span class="duration">3ms</span></h2><pre><code>Supplier.findOne({
+  });</code></pre></li><li class="test pass fast"><h2>Should update supplier in database<span class="duration">2ms</span></h2><pre><code>Supplier.findOne({
   where: {
     id: supplierId
   }
@@ -662,7 +662,7 @@ body {
     expect(res.body.message).to.equal(&#x22;Success delete supplier&#x22;);
     expect(res.body).to.have.property(&#x22;data&#x22;);
     done();
-  });</code></pre></li><li class="test pass fast"><h2>Should delete supplier in database<span class="duration">2ms</span></h2><pre><code>Supplier.findOne({
+  });</code></pre></li><li class="test pass fast"><h2>Should delete supplier in database<span class="duration">1ms</span></h2><pre><code>Supplier.findOne({
   where: {
     id: supplierId
   }

@@ -17,6 +17,7 @@ const productsRouter = require("./routes/product");
 const suppliersRouter = require("./routes/suppliers");
 var addressRouter = require("./routes/addresses");
 const postalcodeRouter = require("./routes/postalCode");
+const productinboundRouter = require("./routes/productInbound");
 
 var app = express();
 
@@ -51,6 +52,7 @@ app.use("/api/products/", productsRouter);
 app.use("/api/suppliers", suppliersRouter);
 app.use("/api/addresses", addressRouter);
 app.use("/api/postalcodes", postalcodeRouter);
+app.use("/api/productinbounds", productinboundRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
