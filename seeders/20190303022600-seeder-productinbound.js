@@ -10,7 +10,7 @@ module.exports = {
           price: 1000,
           meter: 10,
           capital: 500,
-          dateOfInbound: Date(),
+          dateOfInbound: new Date(),
           productId: 1,
           supplierId: 1
         }
