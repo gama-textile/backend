@@ -1,7 +1,5 @@
-const express = require("express");
 const { Product } = require("../models");
 const Op = require("sequelize").Op;
-const fs = require("fs");
 
 exports.index = (req, res) => {
   /*
@@ -20,39 +18,44 @@ exports.index = (req, res) => {
     });
 };
 
-exports.create = (req, res) => {
+exports.upload = (req, res) => {
   /*
    * POST api/products
-   * this function add products
+   * this function add products and upload file
    */
+
+  // Upload a Multipart-File then saving it to MySQL database
+  let sampleFile;
+  let uploadPath;
+
   if (Object.keys(req.files).length == 0) {
-    return res.status(400).send("No files were uploaded.");
+    res.status(400).send("No files were uploaded.");
+    return;
   }
 
-  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  let sampleFile = req.files.fileUpload;
+  console.log("req.files >>>", req.files); // eslint-disable-line
 
-  // Use the mv() method to place the file somewhere on your server
-  sampleFile.mv("/home/tio/filename.jpg", function(err) {
-    if (err) return res.status(500).send(err);
+  sampleFile = req.files.imageUrl;
 
-    res.send("File uploaded!");
+  uploadPath = "public/images/" + sampleFile.name;
+
+  const { name, width } = req.body;
+
+  sampleFile.mv(uploadPath, function(err) {
+    if (err) {
+      console.log(err);
+      console.log("kacuk error");
+      return res.status(500).json({ message: "  Internal server error" });
+    }
+    Product.create({ name, width, imageUrl: uploadPath })
+      .then((product) => {
+        res.status(200).json({ message: "File uploaded to" });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ message: "Internal server error" });
+      });
   });
-  // const { name, width } = req.body;
-  // if (Object.keys(req.files).length == 0) {
-  //   console.log("fuck");
-  //   return res.status(400).json({ message: "No files were uploaded." });
-  // }
-  // // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  // let sampleFile = req.files.imageUrl;
-  // console.log("fuck");
-  // // __basedir + '/resources/static/assets/uploads/'
-  // // Use the mv() method to place the file somewhere on your server
-  // sampleFile.mv("home/Elfin/filename.jpg", function(err) {
-  //   if (err) return res.status(500).json(err);
-  //   console.log("fuck");
-  //   res.send("File uploaded!");
-  // });
 };
 
 exports.find = (req, res) => {
@@ -122,27 +125,3 @@ exports.destroy = (req, res) => {
       res.status(500).json({ message: "Internal server error" });
     });
 };
-
-// const fs = require('fs');
-
-// const db = require('../config/db.config.js');
-// const Image = db.images;
-
-// // Upload a Multipart-File then saving it to MySQL database
-// exports.upload = (req, res) => {
-// 	Image.create({
-// 		type: req.file.mimetype,
-// 		name: req.file.originalname,
-// 		data: fs.readFileSync(__basedir + '/resources/static/assets/uploads/' + req.file.filename)
-// 	}).then(image => {
-// 		try{
-// 			fs.writeFileSync(__basedir + '/resources/static/assets/tmp/' + image.name, image.data);
-
-// 			// exit node.js app
-// 			res.json({'msg': 'File uploaded successfully!', 'file': req.file});
-// 		}catch(e){
-// 			console.log(e);
-// 			res.json({'err': e});
-// 		}
-// 	})
-// };

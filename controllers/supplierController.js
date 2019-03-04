@@ -29,7 +29,7 @@ exports.create = (req, res) => {
     .then((supplier) => {
       res
         .status(201)
-        .json({ data: supplier, message: "Success create data supplier" });
+        .json({ data: supplier, message: "Success create supplier" });
     })
     .catch((err) => {
       console.log(err);

@@ -1,17 +1,32 @@
-"use strict";
+'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("Provinces", {
+    return queryInterface.createTable('ProductInbounds', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      color: {
         type: Sequelize.STRING
       },
-      districtId: {
+      price: {
+        type: Sequelize.INTEGER
+      },
+      meter: {
+        type: Sequelize.INTEGER
+      },
+      capital: {
+        type: Sequelize.INTEGER
+      },
+      dateOfInbound: {
+        type: Sequelize.DATE
+      },
+      productId: {
+        type: Sequelize.INTEGER
+      },
+      supplierId: {
         type: Sequelize.INTEGER
       },
       createdAt: {
@@ -25,6 +40,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("Provinces");
+    return queryInterface.dropTable('ProductInbounds');
   }
 };

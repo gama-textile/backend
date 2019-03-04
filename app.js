@@ -8,6 +8,7 @@ var session = require("express-session");
 var passport = require("passport");
 const fileUpload = require("express-fileupload");
 
+// router all
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 const banksRouter = require("./routes/banks");
@@ -15,6 +16,8 @@ const authRouter = require("./routes/auth");
 const productsRouter = require("./routes/products");
 const suppliersRouter = require("./routes/suppliers");
 var addressRouter = require("./routes/addresses");
+const postalcodeRouter = require("./routes/postalCode");
+const productinboundRouter = require("./routes/productInbound");
 
 var app = express();
 
@@ -45,9 +48,11 @@ app.use("/api", indexRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/banks", banksRouter);
 app.use("/api/auth", authRouter);
-app.use("/api/products", productsRouter);
+app.use("/api/products/", productsRouter);
 app.use("/api/suppliers", suppliersRouter);
 app.use("/api/addresses", addressRouter);
+app.use("/api/postalcodes", postalcodeRouter);
+app.use("/api/productinbounds", productinboundRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
