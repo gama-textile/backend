@@ -11,9 +11,9 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      districtId: {
-        type: Sequelize.INTEGER
-      },
+      // districtId: {
+      //   type: Sequelize.INTEGER
+      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

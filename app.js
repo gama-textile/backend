@@ -11,13 +11,15 @@ const fileUpload = require("express-fileupload");
 // router all
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-const banksRouter = require("./routes/banks");
 const authRouter = require("./routes/auth");
+const banksRouter = require("./routes/banks");
 const productsRouter = require("./routes/product");
 const suppliersRouter = require("./routes/suppliers");
 var addressRouter = require("./routes/addresses");
-const postalcodeRouter = require("./routes/postalCode");
-const productinboundRouter = require("./routes/productInbound");
+const postalcodeRouter = require("./routes/postalCodes");
+const productinboundRouter = require("./routes/productInbounds");
+const districtRouter = require("./routes/districts");
+const provinceRouter = require("./routes/provinces");
 
 var app = express();
 
@@ -53,6 +55,8 @@ app.use("/api/suppliers", suppliersRouter);
 app.use("/api/addresses", addressRouter);
 app.use("/api/postalcodes", postalcodeRouter);
 app.use("/api/productinbounds", productinboundRouter);
+app.use("/api/districts", districtRouter);
+app.use("/api/provinces", provinceRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
