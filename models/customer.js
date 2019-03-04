@@ -16,6 +16,8 @@ module.exports = (sequelize, DataTypes) => {
      * Relasi error saat di run
      * Costumer.hasManny(sequelize.models.Transaction);
      */
+    Customer.hasMany(sequelize.models.Address);
+    Customer.hasMany(sequelize.models.Transaction);
   };
   return Customer;
 };

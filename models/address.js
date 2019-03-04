@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Address = sequelize.define(
     "Address",
     {
+      // Attributes
       name: DataTypes.STRING,
       phoneNumber: DataTypes.STRING,
       mainAddress: DataTypes.BOOLEAN,
@@ -10,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
       description: DataTypes.STRING,
       latitude: DataTypes.DOUBLE,
       longitude: DataTypes.DOUBLE,
+
+      // Foreign Key
       customerId: DataTypes.INTEGER,
       cityId: DataTypes.INTEGER,
       provinceId: DataTypes.INTEGER,
@@ -18,6 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {}
   );
-  Address.associate = function(models) {};
+  Address.associate = function(models) {
+    Address.belongsTo(sequelize.models.Customer);
+  };
   return Address;
 };
