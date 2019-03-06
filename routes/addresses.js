@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var {
   getAllAddress,
-  getSingleAddress,
+  getAllAddreesSinggleCustomer,
   createAddress,
   updateAddress,
   deleteAddress
@@ -10,7 +10,7 @@ var {
 
 router.get("/", getAllAddress);
 
-router.get("/:id", getSingleAddress);
+router.get("/:customerId", getAllAddreesSinggleCustomer);
 
 router.post("/", createAddress);
 
@@ -18,4 +18,4 @@ router.put("/:id", updateAddress);
 
 router.delete("/:id", deleteAddress);
 
-module.exports = router
+module.exports = router;

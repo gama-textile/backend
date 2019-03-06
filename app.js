@@ -7,6 +7,7 @@ var logger = require("morgan");
 var session = require("express-session");
 var passport = require("passport");
 const fileUpload = require("express-fileupload");
+const cors = require("cors");
 
 // router all
 var indexRouter = require("./routes/index");
@@ -39,6 +40,7 @@ app.use(passport.session()); // persistent login sessions
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
+app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
