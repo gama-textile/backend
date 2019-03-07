@@ -1,4 +1,11 @@
-var { Address } = require("../models");
+var {
+  Address,
+  Customer,
+  City,
+  Province,
+  District,
+  PostalCode
+} = require("../models");
 var Op = require("sequelize").Op;
 
 exports.getAllAddress = (req, res) => {
@@ -7,29 +14,42 @@ exports.getAllAddress = (req, res) => {
    * Get all address
    */
 
-  Address.findAll()
-    .then((addressess) => {
-      if (addressess) {
-        res.status(200).json({ data: addressess, message: "Success" });
-      } else {
-        res.status(204).json({ message: "No addressess found" });
-      }
+  Address.findAll({
+    include: [
+      { model: Customer },
+      { model: Province },
+      { model: City },
+      { model: District },
+      { model: PostalCode }
+    ]
+  })
+    .then((addresses) => {
+      res.status(200).json({ data: addresses, message: "succes" });
     })
     .catch((err) => {
       res.status(500).json({ message: "Internal server error" });
     });
 };
 
-exports.getSingleAddress = (req, res) => {
+exports.getAllAddreesSinggleCustomer = (req, res) => {
   /*
-   * params : id
+   * params : customerId
    * GET /api/addresses/1
-   * Get single address by the gived id
+   * Get all address by the gived customerId
    */
 
-  const { id } = req.params;
+  const { customerId } = req.params;
 
-  Address.findOne({ where: { id: { [Op.eq]: id } } })
+  Address.findAll({
+    include: [
+      { model: Customer },
+      { model: Province },
+      { model: City },
+      { model: District },
+      { model: PostalCode }
+    ],
+    where: { customerId: { [Op.eq]: customerId } }
+  })
     .then((address) => {
       res.status(200).json({ data: address, message: "Success" });
     })

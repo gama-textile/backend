@@ -6,12 +6,8 @@ var session = require("express-session");
 var logger = require("morgan");
 var session = require("express-session");
 var passport = require("passport");
-var fileUpload = require("express-fileupload");
-var cors = require("cors");
-
-var app = express();
-
-app.use(cors());
+const fileUpload = require("express-fileupload");
+const cors = require("cors");
 
 // router all
 const indexRouter = require("./routes/index");
@@ -25,6 +21,8 @@ const postalcodeRouter = require("./routes/postalCodes");
 const productinboundRouter = require("./routes/productInbounds");
 const districtRouter = require("./routes/districts");
 const provinceRouter = require("./routes/provinces");
+
+const app = express();
 
 // Passport configuration
 // For Passport
@@ -42,6 +40,7 @@ app.use(passport.session()); // persistent login sessions
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
+app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

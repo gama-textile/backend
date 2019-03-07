@@ -14,15 +14,29 @@ module.exports = (sequelize, DataTypes) => {
 
       // Foreign Key
       customerId: DataTypes.INTEGER,
-      cityId: DataTypes.INTEGER,
       provinceId: DataTypes.INTEGER,
+      cityId: DataTypes.INTEGER,
       districtId: DataTypes.INTEGER,
       postalCodeId: DataTypes.INTEGER
     },
     {}
   );
   Address.associate = function(models) {
-    Address.belongsTo(sequelize.models.Customer);
+    Address.belongsTo(sequelize.models.Customer, {
+      foreignKey: "customerId"
+    });
+    Address.belongsTo(sequelize.models.Province, {
+      foreignKey: "provinceId"
+    });
+    Address.belongsTo(sequelize.models.City, {
+      foreignKey: "cityId"
+    });
+    Address.belongsTo(sequelize.models.District, {
+      foreignKey: "districtId"
+    });
+    Address.belongsTo(sequelize.models.PostalCode, {
+      foreignKey: "postalCodeId"
+    });
   };
   return Address;
 };

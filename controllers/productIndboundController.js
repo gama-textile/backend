@@ -14,7 +14,7 @@ exports.viewProductInbound = (req, res) => {
       Product.findAll().then((products) => {
         Supplier.findAll().then((suppliers) => {
           res.status(200).json({
-            productinbound: productinbounds,
+            data: productinbounds,
             // product: products,
             // supplier: suppliers,
             message: "Success"
