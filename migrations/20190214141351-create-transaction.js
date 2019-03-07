@@ -8,11 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      dateOfTransaction: {
+        type: Sequelize.DATE
+      },
+      dropShipName: {
+        type: Sequelize.STRING
+      },
       customerId: {
         type: Sequelize.INTEGER
-      },
-      transactionDate: {
-        type: Sequelize.DATE
       },
       shippingAddressId: {
         type: Sequelize.INTEGER

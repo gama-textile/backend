@@ -21,6 +21,7 @@ const postalcodeRouter = require("./routes/postalCodes");
 const productinboundRouter = require("./routes/productInbounds");
 const districtRouter = require("./routes/districts");
 const provinceRouter = require("./routes/provinces");
+const transactionRouter = require("./routes/transactions");
 
 const app = express();
 
@@ -59,6 +60,7 @@ app.use("/api/postalcodes", postalcodeRouter);
 app.use("/api/productinbounds", productinboundRouter);
 app.use("/api/districts", districtRouter);
 app.use("/api/provinces", provinceRouter);
+app.use("/api/transactions", transactionRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

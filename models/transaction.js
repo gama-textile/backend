@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
       dateOfTransaction: DataTypes.DATE,
       dropShipName: DataTypes.STRING,
       customerId: DataTypes.INTEGER,
-      shippingAddressId: DataTypes.INTEGER,
-      transactionDetailId: DataTypes.INTEGER
+      shippingAddressId: DataTypes.INTEGER
+      // transactionDetailId: DataTypes.INTEGER
     },
     {}
   );
@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     Transaction.belongsTo(sequelize.models.Address, {
       foreignKey: "shippingAddressId"
     });
+    Transaction.hasMany(sequelize.models.transactionDetails);
   };
   return Transaction;
 };
