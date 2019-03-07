@@ -61,7 +61,10 @@ exports.getSingleProductInbound = (req, res) => {
 
   const { id } = req.params;
 
-  ProductInbound.findOne({ where: { id: { [Op.eq]: id } } })
+  ProductInbound.findOne({
+    include: [{ model: Supplier }, { model: Product }],
+    where: { id: { [Op.eq]: id } }
+  })
     .then((productinbound) => {
       res.status(200).json({ data: productinbound, message: "Success" });
     })
