@@ -10,9 +10,8 @@ exports.getAlltransaction = (req, res) => {
    *GET /api/transactions
    *GET all transactions
    */
-  transactionDetails
-    .findAll({
-      include: [{ model: Transaction }, { model: ProductInbound }]
+  Transaction.findAll({
+      include: ['transaction_productInbound', 'transaction_product']
     })
     .then((transactions) => {
       res.status(200).json({ data: transactions, message: "Success" });

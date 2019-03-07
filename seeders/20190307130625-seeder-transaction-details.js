@@ -9,6 +9,11 @@ module.exports = {
           length: 1,
           transactionId: 1,
           productInboundId: 1
+        },
+        {
+          length: 2,
+          transactionId: 1,
+          productInboundId: 2
         }
       ],
       {}

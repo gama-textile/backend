@@ -13,6 +13,15 @@ module.exports = {
           dateOfInbound: new Date(),
           productId: 1,
           supplierId: 1
+        },
+        {
+          color: "biru",
+          price: 2500,
+          meter: 20,
+          capital: 1000,
+          dateOfInbound: new Date(),
+          productId: 1,
+          supplierId: 1
         }
       ],
       {}

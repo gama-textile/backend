@@ -16,12 +16,20 @@ module.exports = (sequelize, DataTypes) => {
   ProductInbound.associate = function(models) {
     // associations can be defined here
     ProductInbound.belongsTo(sequelize.models.Product, {
+      as: '',
       foreignKey: "productId"
     });
+
     ProductInbound.belongsTo(sequelize.models.Supplier, {
       foreignKey: "supplierId"
     });
-    ProductInbound.belongsTo(sequelize.models.transactionDetails);
+
+    ProductInbound.hasMany(sequelize.models.transactionDetails, { as: 'ProductDetail'})
+
+    ProductInbound.belongsToMany(sequelize.models.Transaction, { 
+      as: 'product_inbound', through: sequelize.models.transactionDetails, 
+      foreignKey: 'transactionId' 
+    })
   };
   return ProductInbound;
 };
