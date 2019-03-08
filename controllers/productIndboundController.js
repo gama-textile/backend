@@ -35,6 +35,8 @@ exports.createProductInbound = (req, res) => {
    */
   const productinbound = ({
     color,
+    ingredients,
+    description,
     price,
     meter,
     capital,
@@ -83,6 +85,8 @@ exports.updateProductInbound = (req, res) => {
   const { id } = req.params;
   const newProductInbound = ({
     color,
+    ingredients,
+    description,
     price,
     meter,
     capital,

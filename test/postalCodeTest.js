@@ -18,6 +18,7 @@ describe("GET all add", (done) => {
       expect(res.body).to.have.property("message");
       expect(res.body.message).to.equal("Success");
       expect(res.body).to.have.property("data");
+      done();
     });
 });
 
