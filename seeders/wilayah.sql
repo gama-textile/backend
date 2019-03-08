@@ -1,4 +1,3 @@
-USE DATABASE db_gamatextile;
 INSERT INTO `Provinces` (id, name) VALUES
   (11, 'ACEH'),
   (12, 'SUMATERA UTARA'),
