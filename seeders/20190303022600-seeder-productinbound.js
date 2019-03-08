@@ -6,6 +6,7 @@ module.exports = {
       "ProductInbounds",
       [
         {
+          id:1,
           color: "mereh",
           price: 1000,
           meter: 10,
@@ -15,6 +16,7 @@ module.exports = {
           supplierId: 1
         },
         {
+          id:2,
           color: "biru",
           price: 2500,
           meter: 20,

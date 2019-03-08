@@ -5,7 +5,8 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "dev": "nodemon ./bin/www",
-    "test": "NODE_ENV=test fresh migrate seed && nyc mocha --reporter mocha-simple-html-reporter --reporter-options output=test-report.html --exit && live-server test-report.html"
+    "test": "NODE_ENV=test fresh migrate seed && nyc mocha --reporter mocha-simple-html-reporter --reporter-options output=test-report.html --exit && live-server test-report.html",
+    "db_reset": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all"
   },
   "dependencies": {
     "async": "^2.6.2",
