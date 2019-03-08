@@ -1,4 +1,4 @@
-const { Product } = require("../models");
+const { Product, ProductInbound } = require("../models");
 const Op = require("sequelize").Op;
 
 exports.index = (req, res) => {
@@ -6,7 +6,7 @@ exports.index = (req, res) => {
    * GET api/products
    * this function display all banks
    */
-  Product.findAll()
+  Product.findAll({ include: ProductInbound})
     .then((products) => {
       res
         .status(200)

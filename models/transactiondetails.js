@@ -1,7 +1,7 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  const transactionDetails = sequelize.define(
-    "transactionDetails",
+  const TransactionDetails = sequelize.define(
+    "TransactionDetails",
     {
       length: DataTypes.INTEGER,
       transactionId: DataTypes.INTEGER,
@@ -9,19 +9,16 @@ module.exports = (sequelize, DataTypes) => {
     },
     {}
   );
-  transactionDetails.associate = function(models) {
-    /*
-     * Relasi error saat di run
-     * transactionDetails.belongsTo(sequelize.models.Transaction);
-     * transactionDetails.belongsTo(sequelize.models.Product);
-     */
-    transactionDetails.belongsTo(sequelize.models.Transaction, {
-      foreignKey: "transactionId"
+  TransactionDetails.associate = function(models) {
+
+    TransactionDetails.belongsTo(sequelize.models.Transaction, {
+      foreignKey: "transactionId",
     });
 
-    transactionDetails.belongsTo(sequelize.models.ProductInbound, {
+    TransactionDetails.ProductInbound = TransactionDetails.belongsTo(sequelize.models.ProductInbound,
+    {
       foreignKey: "productInboundId"
     });
   };
-  return transactionDetails;
+  return TransactionDetails;
 };

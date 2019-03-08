@@ -10,10 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   Product.associate = function(models) {
-    /*
-     *  relasi error saat di run
-     *  Product.hasMany(sequelize.models.TransactionDetail);
-     */
+    
+     Product.hasMany(sequelize.models.ProductInbound);
   };
   return Product;
 };

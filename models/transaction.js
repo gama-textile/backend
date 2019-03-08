@@ -12,10 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   Transaction.associate = function(models) {
-    /*
-     * Relasi error saat di run
-     * Transaction.belongsTo(sequelize.models.Constumer);
-     */
+
     Transaction.belongsTo(sequelize.models.Customer, {
       foreignKey: "customerId"
     });
@@ -24,19 +21,19 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "shippingAddressId"
     });
 
-    Transaction.hasMany(sequelize.models.transactionDetails, { as: 'detailTransactions'});
+    Transaction.TransactionDetails = Transaction.hasMany(sequelize.models.TransactionDetails);
 
-    Transaction.belongsToMany(sequelize.models.ProductInbound, {
-      as: 'transaction_productInbound',
-      through: sequelize.models.transactionDetails,
-      foreignKey: 'productInboundId',
-    })
+    // Transaction.belongsToMany(sequelize.models.ProductInbound, {
+    //   as: 'transaction_productInbound',
+    //   through: sequelize.models.transactionDetails,
+    //   foreignKey: 'productInboundId',
+    // });
 
-    Transaction.belongsToMany(sequelize.models.Product, {
-      as: 'transaction_product',
-      through: 'ProductInbound',
-      foreignKey: 'productId',
-    })    
+    // Transaction.belongsToMany(sequelize.models.Product, {
+    //   as: 'transaction_product',
+    //   through: sequelize.models.ProductInbound,
+    //   foreignKey: 'productId',
+    // });
   };
   return Transaction;
 };
