@@ -17,6 +17,17 @@ module.exports = {
           lastLogin: "",
           createdAt: new Date(),
           updatedAt: new Date()
+        },
+        {
+          customerId: 2,
+          email: "karya.tiosaputra@gmail.com",
+          password: password,
+          facebook: "",
+          phoneNumber: "0895396914045",
+          salt: "",
+          lastLogin: "",
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       ],
       {}

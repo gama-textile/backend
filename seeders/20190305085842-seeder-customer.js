@@ -6,8 +6,17 @@ module.exports = {
       "Customers",
       [
         {
+          id:1,
           firstName: "Elfin",
           lastName: "Sanjaya",
+          dateOfBirth: new Date(),
+          gender: "laki-laki",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },{
+          id:2,
+          firstName: "Tio",
+          lastName: "Saputra",
           dateOfBirth: new Date(),
           gender: "laki-laki",
           createdAt: new Date(),

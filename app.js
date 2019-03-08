@@ -6,8 +6,8 @@ var session = require("express-session");
 var logger = require("morgan");
 var session = require("express-session");
 var passport = require("passport");
-const fileUpload = require("express-fileupload");
-const cors = require("cors");
+var fileUpload = require("express-fileupload");
+var cors = require("cors");
 
 // router all
 const indexRouter = require("./routes/index");
@@ -22,6 +22,7 @@ const productinboundRouter = require("./routes/productInbounds");
 const districtRouter = require("./routes/districts");
 const provinceRouter = require("./routes/provinces");
 const transactionRouter = require("./routes/transactions");
+const cartRouter = require('./routes/carts');
 
 const app = express();
 
@@ -61,6 +62,7 @@ app.use("/api/productinbounds", productinboundRouter);
 app.use("/api/districts", districtRouter);
 app.use("/api/provinces", provinceRouter);
 app.use("/api/transactions", transactionRouter);
+app.use("/api/carts", cartRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
