@@ -24,7 +24,7 @@ exports.getAllAddress = (req, res) => {
     ]
   })
     .then((addresses) => {
-      res.status(200).json({ data: addresses, message: "succes" });
+      res.status(200).json({ data: addresses, message: "Success" });
     })
     .catch((err) => {
       res.status(500).json({ message: "Internal server error" });
