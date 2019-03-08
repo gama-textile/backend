@@ -80,7 +80,7 @@ exports.createAddress = (req, res) => {
 
   Address.create(address)
     .then((address) => {
-      res.status(200).json({ data: address, message: "Successs" });
+      res.status(201).json({ data: address, message: "Successs" });
     })
     .catch((err) => {
       res.status(500).json({ message: "Internal server error" });
