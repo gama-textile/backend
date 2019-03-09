@@ -9,7 +9,9 @@ module.exports = {
           dateOfTransaction: new Date(),
           dropShipName: "tio",
           customerId: 1,
-          shippingAddressId: 1
+          shippingAddressId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       ],
       {}

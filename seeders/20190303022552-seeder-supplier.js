@@ -7,7 +7,9 @@ module.exports = {
       [
         {
           name: "John Doe",
-          alamat: "lampung"
+          alamat: "lampung",
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       ],
       {}

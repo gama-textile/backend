@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     length_per_meter: DataTypes.INTEGER
   }, {});
   Cart.associate = function(models) {
-    Cart.belongsTo(sequelize.models.ProductInbound, { foreignKey: 'productInboundId'})
+    Cart.ProductInbound = Cart.belongsTo(sequelize.models.ProductInbound, { foreignKey: 'productInboundId'});
+    
     Cart.belongsTo(sequelize.models.Customer, { foreignKey: 'customerId'})
   };
   return Cart;

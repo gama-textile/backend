@@ -1,9 +1,15 @@
-const { District, PostalCode } = require("../models");
 const Op = require("sequelize").Op;
-const { Cart } = require('../models');
+const { Cart, ProductInbound } = require('../models');
 
 exports.index = (req, res) => {
-	Cart.findAll()
+	Cart.findAll({
+      include: [{
+          association: Cart.ProductInbound,
+          include: [{
+            association: ProductInbound.Product,
+          }]
+        }]
+    })
     .then((carts) => {
       res.status(200).json({ data: carts, message: "Success read all carts" });
     })

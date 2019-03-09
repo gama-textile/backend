@@ -1,14 +1,14 @@
 {
   "development": {
-    "username": "root",
-    "password": "",
+    "username": "tio",
+    "password": "mysql",
     "database": "db_gamatextile",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": "",
+    "username": "tio",
+    "password": "mysql",
     "database": "db_gamatextile_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
