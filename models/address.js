@@ -22,19 +22,23 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   Address.associate = function(models) {
-    Address.belongsTo(sequelize.models.Customer, {
+    Address.Customer = Address.belongsTo(sequelize.models.Customer, {
       foreignKey: "customerId"
     });
-    Address.belongsTo(sequelize.models.Province, {
+
+    Address.Province = Address.belongsTo(sequelize.models.Province, {
       foreignKey: "provinceId"
     });
-    Address.belongsTo(sequelize.models.City, {
+
+    Address.City = Address.belongsTo(sequelize.models.City, {
       foreignKey: "cityId"
     });
-    Address.belongsTo(sequelize.models.District, {
+
+    Address.District = Address.belongsTo(sequelize.models.District, {
       foreignKey: "districtId"
     });
-    Address.belongsTo(sequelize.models.PostalCode, {
+
+    Address.PostalCode = Address.belongsTo(sequelize.models.PostalCode, {
       foreignKey: "postalCodeId"
     });
   };

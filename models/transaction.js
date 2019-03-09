@@ -12,8 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   Transaction.associate = function(models) {
-
-    Transaction.belongsTo(sequelize.models.Customer, {
+    Transaction.Customer = Transaction.belongsTo(sequelize.models.Customer, {
       foreignKey: "customerId"
     });
 
@@ -21,7 +20,13 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "shippingAddressId"
     });
 
-    Transaction.TransactionDetails = Transaction.hasMany(sequelize.models.TransactionDetails);
+    Transaction.TransactionDetails = Transaction.hasMany(
+      sequelize.models.TransactionDetails
+    );
+
+    Transaction.Address = Transaction.belongsTo(sequelize.models.Address, {
+      foreignKey: "shippingAddressId"
+    });
 
     // Transaction.belongsToMany(sequelize.models.ProductInbound, {
     //   as: 'transaction_productInbound',
