@@ -8,14 +8,18 @@ module.exports = {
           productInboundId : 1,
           customerId : 2,
           note : "Yang bagus ya kakak",
-          length_per_meter : 12
+          length_per_meter : 12,
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
         {
           id: 2,
           productInboundId : 2,
           customerId : 2,
           note : "Yang bagus ya kakak",
-          length_per_meter : 12
+          length_per_meter : 12,
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       ], {});
   },

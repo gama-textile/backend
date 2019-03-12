@@ -6,7 +6,9 @@ module.exports = {
       "PostalCodes",
       [
         {
-          name: "postalcode tes"
+          name: "postalcode tes",
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       ],
       {}

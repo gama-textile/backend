@@ -17,7 +17,9 @@ module.exports = {
           cityId: 1101,
           provinceId: 11,
           districtId: 1101010,
-          postalCodeId: 1
+          postalCodeId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
         {
           name: "Jln. Abdul Kadir Gg. pipit",
@@ -31,7 +33,9 @@ module.exports = {
           cityId: 1101,
           provinceId: 11,
           districtId: 1101010,
-          postalCodeId: 1
+          postalCodeId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       ],
       {}

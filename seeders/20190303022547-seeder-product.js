@@ -8,7 +8,9 @@ module.exports = {
         {
           name: "Kain",
           width: 10,
-          imageUrl: ""
+          imageUrl: "",
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       ],
       {}

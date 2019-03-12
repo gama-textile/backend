@@ -15,7 +15,9 @@ module.exports = {
           capital: 500,
           dateOfInbound: new Date(),
           productId: 1,
-          supplierId: 1
+          supplierId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
         {
           id:2,
@@ -27,7 +29,9 @@ module.exports = {
           capital: 1000,
           dateOfInbound: new Date(),
           productId: 1,
-          supplierId: 1
+          supplierId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       ],
       {}
