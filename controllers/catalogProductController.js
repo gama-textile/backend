@@ -279,7 +279,7 @@ exports.getSingleProduct = (req, res) => {
     });
 };
 
-exports.update = (req, res) => {
+exports.updateProduct = (req, res) => {
   /*
    * PUT /api/catalog-products/products/1
    * Update single product
@@ -305,7 +305,7 @@ exports.update = (req, res) => {
     });
 };
 
-exports.destroyProduct = (req, res) => {
+exports.deleteProduct = (req, res) => {
   /*
    * DELETE /api/catalog-products/products/1
    * Delete a bank with the given id
