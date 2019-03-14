@@ -39,6 +39,7 @@ exports.getAllAddreesSinggleCustomer = (req, res) => {
    */
 
   const { customerId } = req.params;
+  console.log(customerId);
 
   Address.findAll({
     include: [
@@ -51,7 +52,9 @@ exports.getAllAddreesSinggleCustomer = (req, res) => {
     where: { customerId: { [Op.eq]: customerId } }
   })
     .then((address) => {
-      res.status(200).json({ data: address, message: "Success" });
+      if (address) {
+        return res.status(200).json({ data: address, message: "Success" });
+      }
     })
     .catch((err) => {
       res.status(500).json({ message: "Internal server error" });
@@ -117,7 +120,7 @@ exports.updateAddress = (req, res) => {
           res.status(200).json({ data: updatedAddress, message: "Sucess" });
         });
       } else {
-        res.status(400).json({ message: "Address not found" });
+        res.status(404).json({ message: "Address not found" });
       }
     })
     .catch((err) => {

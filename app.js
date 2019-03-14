@@ -12,6 +12,7 @@ var cors = require("cors");
 // router all
 const indexRouter = require("./routes/index");
 const catalogProductRouter = require("./routes/catalogProduct");
+const addressRouter = require("./routes/addresses");
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.use(fileUpload());
 // use all api
 app.use("/api", indexRouter);
 app.use("/api/catalog-products", catalogProductRouter);
+app.use("/api/addresses", addressRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
