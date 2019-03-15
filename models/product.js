@@ -4,14 +4,13 @@ module.exports = (sequelize, DataTypes) => {
     "Product",
     {
       name: DataTypes.STRING,
-      width: DataTypes.INTEGER,
+      size: DataTypes.INTEGER /* size = lebar bahan */,
       imageUrl: DataTypes.STRING
     },
     {}
   );
   Product.associate = function(models) {
-    
-     Product.hasMany(sequelize.models.ProductInbound);
+    Product.hasMany(sequelize.models.ProductInbound);
   };
   return Product;
 };

@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     "ProductInbound",
     {
       color: DataTypes.STRING,
-      ingredients: DataTypes.STRING,
+      material: DataTypes.STRING,
       description: DataTypes.STRING,
       price: DataTypes.INTEGER,
       meter: DataTypes.INTEGER,

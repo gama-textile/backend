@@ -11,7 +11,8 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      width: {
+      size: {
+        /* size = lebar bahan */
         type: Sequelize.INTEGER
       },
       imageUrl: {

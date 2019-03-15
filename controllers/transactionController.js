@@ -61,19 +61,25 @@ exports.createTransaction = (req, res) => {
    * Insert transactions
    */
 
-  const transaction = ({
+  const {
     dateOfTransaction,
     dropShipName,
     customerId,
     shippingAddressId
-  } = req.boby);
+  } = req.body;
 
-  Transaction.create(transaction)
+  Transaction.create({
+    dateOfTransaction,
+    dropShipName,
+    customerId,
+    shippingAddressId
+  })
     .then((transactions) => {
       res.status(201).json({ data: transactions, message: "Success" });
     })
     .catch((err) => {
       console.log(err);
+      console.log("err");
       res.status(500).json({ message: "Internal server error" });
     });
 };

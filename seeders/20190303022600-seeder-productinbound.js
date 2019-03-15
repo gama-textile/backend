@@ -6,10 +6,10 @@ module.exports = {
       "ProductInbounds",
       [
         {
-          id:1,
+          id: 1,
           color: "mereh",
-          ingredients: "kain oke",
-          description: "barang bagus bener elfin",
+          material: "kain katun",
+          description: "bahan nya yang bagus iya mas",
           price: 1000,
           meter: 10,
           capital: 500,
@@ -20,10 +20,10 @@ module.exports = {
           updatedAt: new Date()
         },
         {
-          id:2,
+          id: 2,
           color: "biru",
-          ingredients: "kain oke",
-          description: "barang bagus bener elfin",
+          material: "kain oke",
+          description: "barang bagus iya mbak",
           price: 2500,
           meter: 20,
           capital: 1000,

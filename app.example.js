@@ -11,8 +11,18 @@ var cors = require("cors");
 
 // router all
 const indexRouter = require("./routes/index");
-const catalogProductRouter = require("./routes/catalogProduct");
+const usersRouter = require("./routes/users");
+const authRouter = require("./routes/auth");
+const banksRouter = require("./routes/banks");
+const productsRouter = require("./routes/products");
+const suppliersRouter = require("./routes/suppliers");
 const addressRouter = require("./routes/addresses");
+const postalcodeRouter = require("./routes/postalCodes");
+const productinboundRouter = require("./routes/productInbounds");
+const districtRouter = require("./routes/districts");
+const provinceRouter = require("./routes/provinces");
+const transactionRouter = require("./routes/transactions");
+const cartRouter = require("./routes/carts");
 
 const app = express();
 
@@ -40,10 +50,19 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(fileUpload());
 
-// use all api
 app.use("/api", indexRouter);
-app.use("/api/catalog-products", catalogProductRouter);
+app.use("/api/users", usersRouter);
+app.use("/api/banks", banksRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/products", productsRouter);
+app.use("/api/suppliers", suppliersRouter);
 app.use("/api/addresses", addressRouter);
+app.use("/api/postalcodes", postalcodeRouter);
+app.use("/api/productinbounds", productinboundRouter);
+app.use("/api/districts", districtRouter);
+app.use("/api/provinces", provinceRouter);
+app.use("/api/transactions", transactionRouter);
+app.use("/api/carts", cartRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

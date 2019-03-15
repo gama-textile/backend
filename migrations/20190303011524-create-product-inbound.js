@@ -11,7 +11,7 @@ module.exports = {
       color: {
         type: Sequelize.STRING
       },
-      ingredients: {
+      material: {
         type: Sequelize.STRING
       },
       description: {
