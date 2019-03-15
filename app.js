@@ -13,6 +13,8 @@ var cors = require("cors");
 const indexRouter = require("./routes/index");
 const catalogProductRouter = require("./routes/catalogProduct");
 const addressRouter = require("./routes/addresses");
+const authRouter = require("./routes/auth");
+const cartsRoter = require("./routes/carts");
 
 const app = express();
 
@@ -44,6 +46,8 @@ app.use(fileUpload());
 app.use("/api", indexRouter);
 app.use("/api/catalog-products", catalogProductRouter);
 app.use("/api/addresses", addressRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/carts", cartsRoter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
