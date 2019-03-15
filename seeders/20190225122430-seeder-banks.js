@@ -7,7 +7,9 @@ module.exports = {
       [
         {
           name: "Mandiri",
-          nomorRekening: "192-001-001"
+          nomorRekening: "192-001-001",
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       ],
       {}

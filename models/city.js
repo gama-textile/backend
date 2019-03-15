@@ -3,8 +3,8 @@ module.exports = (sequelize, DataTypes) => {
   const City = sequelize.define(
     "City",
     {
-      name: DataTypes.STRING,
-      provinceId: DataTypes.INTEGER
+      provinceId: DataTypes.INTEGER,
+      name: DataTypes.STRING
     },
     {}
   );

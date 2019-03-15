@@ -3,8 +3,8 @@ var Op = require("sequelize").Op;
 
 exports.getAllPostalCode = (req, res) => {
   /*
-   * GET /api/postalcode/
-   * Get all postalcode
+   * GET /api/postalcodes/
+   * Get all postalcodes
    */
 
   PostalCode.findAll()

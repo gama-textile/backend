@@ -14,7 +14,7 @@ exports.viewProductInbound = (req, res) => {
       Product.findAll().then((products) => {
         Supplier.findAll().then((suppliers) => {
           res.status(200).json({
-            productinbound: productinbounds,
+            data: productinbounds,
             // product: products,
             // supplier: suppliers,
             message: "Success"
@@ -35,6 +35,8 @@ exports.createProductInbound = (req, res) => {
    */
   const productinbound = ({
     color,
+    ingredients,
+    description,
     price,
     meter,
     capital,
@@ -61,7 +63,10 @@ exports.getSingleProductInbound = (req, res) => {
 
   const { id } = req.params;
 
-  ProductInbound.findOne({ where: { id: { [Op.eq]: id } } })
+  ProductInbound.findOne({
+    include: [{ model: Supplier }, { model: Product }],
+    where: { id: { [Op.eq]: id } }
+  })
     .then((productinbound) => {
       res.status(200).json({ data: productinbound, message: "Success" });
     })
@@ -80,6 +85,8 @@ exports.updateProductInbound = (req, res) => {
   const { id } = req.params;
   const newProductInbound = ({
     color,
+    ingredients,
+    description,
     price,
     meter,
     capital,
