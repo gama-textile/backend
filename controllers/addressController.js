@@ -8,6 +8,7 @@ var {
 } = require("../models");
 var Op = require("sequelize").Op;
 
+/* part backoffice */
 exports.getAllAddress = (req, res) => {
   /*
    * GET /api/addresses/
@@ -31,7 +32,7 @@ exports.getAllAddress = (req, res) => {
     });
 };
 
-exports.getAllAddreesSinggleCustomer = (req, res) => {
+exports.getAllAddreesSingleCustomer = (req, res) => {
   /*
    * params : customerId
    * GET /api/addresses/1
@@ -57,6 +58,7 @@ exports.getAllAddreesSinggleCustomer = (req, res) => {
       }
     })
     .catch((err) => {
+      console.log("error");
       res.status(500).json({ message: "Internal server error" });
     });
 };
@@ -97,7 +99,8 @@ exports.updateAddress = (req, res) => {
    * Update address with the given id
    */
 
-  const { id } = req.params;
+  const { customerId } = req.params;
+
   const newAddress = ({
     name,
     phoneNumber,
@@ -106,15 +109,16 @@ exports.updateAddress = (req, res) => {
     mainAddress,
     latitude,
     longitude,
-    customerId,
+    // customerId,
     cityId,
     provinceId,
     districtId,
     postalCodeId
   } = req.body);
 
-  Address.findOne({ where: { id: { [Op.eq]: id } } })
+  Address.findOne({ where: { customerId: { [Op.eq]: customerId } } })
     .then((address) => {
+      console.log(address);
       if (address) {
         return address.update(newAddress).then((updatedAddress) => {
           res.status(200).json({ data: updatedAddress, message: "Sucess" });

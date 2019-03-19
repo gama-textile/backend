@@ -7,7 +7,7 @@ const Op = require("sequelize").Op;
 
 exports.signup = (req, res) => {
   /*
-   *POST api/authentications/signup
+   *POST api/auth/signup
    * this function add customers and authentication
    */
   const {
