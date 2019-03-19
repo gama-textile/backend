@@ -75,7 +75,7 @@ describe("Banks Crud", () => {
   it("should update bank info", (done) => {
     chai
       .request(app)
-      .put(`/api/bankS/${bankId}`)
+      .put(`/api/banks/${bankId}`)
       .send({ name: "BCA", nomorRekening: "009-002-001" })
       .end((err, res) => {
         expect(res).to.have.status(201);

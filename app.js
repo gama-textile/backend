@@ -10,11 +10,12 @@ var fileUpload = require("express-fileupload");
 var cors = require("cors");
 
 // router all
-const indexRouter = require("./routes/index");
-const catalogProductRouter = require("./routes/catalogProduct");
 const addressRouter = require("./routes/addresses");
 const authRouter = require("./routes/auth");
+const bankRouter = require("./routes/banks");
+const catalogProductRouter = require("./routes/catalogProduct");
 const cartRouter = require("./routes/carts");
+const indexRouter = require("./routes/index");
 const transactionRouter = require("./routes/transactions");
 
 const app = express();
@@ -50,6 +51,7 @@ app.use("/api/addresses", addressRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/carts", cartRouter);
 app.use("/api/transactions", transactionRouter);
+app.use("/api/banks", bankRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
