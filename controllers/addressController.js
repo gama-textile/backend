@@ -85,7 +85,7 @@ exports.createAddress = (req, res) => {
 
   Address.create(address)
     .then((address) => {
-      res.status(201).json({ data: address, message: "Successs" });
+      res.status(201).json({ data: address, message: "Success" });
     })
     .catch((err) => {
       res.status(500).json({ message: "Internal server error" });
@@ -121,7 +121,7 @@ exports.updateAddress = (req, res) => {
       console.log(address);
       if (address) {
         return address.update(newAddress).then((updatedAddress) => {
-          res.status(200).json({ data: updatedAddress, message: "Sucess" });
+          res.status(200).json({ data: updatedAddress, message: "Success" });
         });
       } else {
         res.status(404).json({ message: "Address not found" });
@@ -146,7 +146,7 @@ exports.deleteAddress = (req, res) => {
       return address.destroy();
     })
     .then((address) => {
-      res.status(200).json({ data: address, message: "Sucess" });
+      res.status(200).json({ data: address, message: "Success" });
     })
     .catch((err) => {
       res.status(500).json({ message: "Internal server error" });
