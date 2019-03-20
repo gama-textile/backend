@@ -91,7 +91,7 @@ describe("Address Crud", function() {
   it("Should create adress in database", (done) => {
     Address.findOne({
       where: {
-        customerId: customerId
+        id: addressId
       }
     })
       .then((address) => {

@@ -47,7 +47,7 @@ exports.createPostalCode = (req, res) => {
 
   PostalCode.create(postalcode)
     .then((postalcode) => {
-      res.status(200).json({ data: postalcode, message: "Successs" });
+      res.status(200).json({ data: postalcode, message: "Success" });
     })
     .catch((err) => {
       res.status(500).json({ message: "Internal server error" });
@@ -68,7 +68,7 @@ exports.updatePostalCode = (req, res) => {
     .then((postalcode) => {
       if (postalcode) {
         return postalcode.update(newPostalCode).then((updatedPostalCode) => {
-          res.status(200).json({ data: updatedPostalCode, message: "Sucess" });
+          res.status(201).json({ data: updatedPostalCode, message: "Success" });
         });
       } else {
         res.status(400).json({ message: "Address not found" });
@@ -93,7 +93,7 @@ exports.deletePostalCode = (req, res) => {
       return postalcode.destroy();
     })
     .then((postalcode) => {
-      res.status(200).json({ data: postalcode, message: "Sucess" });
+      res.status(200).json({ data: postalcode, message: "Success" });
     })
     .catch((err) => {
       res.status(500).json({ message: "Internal server error" });

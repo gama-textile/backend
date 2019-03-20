@@ -40,7 +40,6 @@ exports.getAllAddreesSingleCustomer = (req, res) => {
    */
 
   const { customerId } = req.params;
-  console.log(customerId);
 
   Address.findAll({
     include: [
@@ -68,6 +67,7 @@ exports.createAddress = (req, res) => {
    * POST /api/addresses
    * Insert address
    */
+
   const address = ({
     name,
     phoneNumber,

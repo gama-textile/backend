@@ -4,85 +4,117 @@ const chai = require("chai");
 const expect = chai.expect;
 const chaiHttp = require("chai-http");
 const app = require("../app");
-const { PostalCOde } = require("../models");
+const { PostalCode } = require("../models");
 
 chai.use(chaiHttp);
-
-describe("GET all add", (done) => {
-  chai
-    .request(app)
-    .get("/api/postalcodes")
-    .end((err, res) => {
-      expect(res).to.have.status(200);
-      expect(res).to.be.json;
-      expect(res.body).to.have.property("message");
-      expect(res.body.message).to.equal("Success");
-      expect(res.body).to.have.property("data");
-      done();
-    });
-});
-
-var postalCodeId = 0;
-var postalCode = {
-  name: "Jawa tengan"
+var postalCodeId;
+var newPostalCode = {
+  name: "Jawa tengah"
 };
 
-var updatedpostalcode = {
-  name: "Jawa Baru"
+var updatedPostalCode = {
+  name: "Jawa barat"
 };
 
-describe("/PostalCode CRUD", () => {
-  // Insert an postalCode
-  it("Should insert postalCode into database", (done) => {
+describe("Postal Code Crud", function() {
+  /* GET all postal code */
+  it("It should get all postal code", (done) => {
     chai
       .request(app)
-      .post("/api/postalcodes")
-      .send(postalCode)
+      .get("/api/postalcodes")
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res).to.be.json;
         expect(res.body).to.have.property("message");
+        expect(res.body.message).to.equal("Success");
         expect(res.body).to.have.property("data");
-        postalCodeId = res.body.data.id;
         done();
       });
   });
 
-  // Get the inserted postalCode
-  it("GET SINGLE postalCode", (done) => {
+  /* Insert bank */
+  it("Should create new postal code", (done) => {
     chai
       .request(app)
-      .get(`/api/postalcodes/${postalCodeId}`)
+      .post("/api/postalcodes")
+      .send(newPostalCode)
       .end((err, res) => {
-        expect(res.body.data.name).to.equal(postalCode.name);
+        expect(res).to.have.status(200);
+        expect(res).to.be.json;
+        expect(res.body).to.have.property("message");
+        expect(res.body.message).to.equal("Success");
+        expect(res.body).to.have.property("data");
+        postalCodeId = res.body.data.id;
+        newPostalCode.name = res.body.data.name;
         done();
       });
   });
 
-  // Update the inserted postalCode
-  it("Should update the insertedd postalCode", (done) => {
+  /* check in the database */
+  it("Should create postal code in database", (done) => {
+    PostalCode.findOne({
+      where: {
+        id: postalCodeId
+      }
+    }).then((postalcodes) => {
+      expect(postalcodes.name).to.equal(newPostalCode.name);
+      done();
+    });
+  });
+
+  /* update bank */
+  it("should update postal code", (done) => {
     chai
       .request(app)
       .put(`/api/postalcodes/${postalCodeId}`)
-      .send(updatedpostalcode)
+      .send(updatedPostalCode)
       .end((err, res) => {
-        console.log(res.body.data.name);
-        expect(res.body.data.name).to.equal(updatedpostalcode.name);
+        expect(res).to.have.status(201);
+        expect(res).to.be.json;
+        expect(res.body).to.have.property("message");
+        expect(res.body.message).to.equal("Success");
+        expect(res.body).to.have.property("data");
+        updatedPostalCode.name = res.body.data.name;
         done();
       });
   });
 
-  // Delete
-  it("Delete the updated postalCode", (done) => {
+  /* check in the database */
+  it("Should update postal code in database", (done) => {
+    PostalCode.findOne({
+      where: {
+        id: postalCodeId
+      }
+    }).then((postalcodes) => {
+      expect(postalcodes.name).to.equal(updatedPostalCode.name);
+      done();
+    });
+  });
+
+  /* delete postal code */
+  it("Should delete a postal code", (done) => {
     chai
       .request(app)
       .del(`/api/postalcodes/${postalCodeId}`)
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res).to.be.json;
-        expect(res.body).to.have.property("data");
         expect(res.body).to.have.property("message");
+        expect(res.body.message).to.equal("Success");
+        expect(res.body).to.have.property("data");
         done();
       });
+  });
+
+  /*check in the database */
+  it("Should delete postal code in database", (done) => {
+    PostalCode.findOne({
+      where: {
+        id: postalCodeId
+      }
+    }).then((postalcodes) => {
+      expect(postalcodes).to.equal(null);
+      done();
+    });
   });
 });
