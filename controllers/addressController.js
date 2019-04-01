@@ -8,6 +8,7 @@ var {
 } = require("../models");
 var Op = require("sequelize").Op;
 
+/* part backoffice */
 exports.getAllAddress = (req, res) => {
   /*
    * GET /api/addresses/
@@ -31,7 +32,7 @@ exports.getAllAddress = (req, res) => {
     });
 };
 
-exports.getAllAddreesSinggleCustomer = (req, res) => {
+exports.getAllAddreesSingleCustomer = (req, res) => {
   /*
    * params : customerId
    * GET /api/addresses/1
@@ -39,7 +40,6 @@ exports.getAllAddreesSinggleCustomer = (req, res) => {
    */
 
   const { customerId } = req.params;
-  console.log(customerId);
 
   Address.findAll({
     include: [
@@ -57,6 +57,7 @@ exports.getAllAddreesSinggleCustomer = (req, res) => {
       }
     })
     .catch((err) => {
+      console.log("error");
       res.status(500).json({ message: "Internal server error" });
     });
 };
@@ -66,6 +67,7 @@ exports.createAddress = (req, res) => {
    * POST /api/addresses
    * Insert address
    */
+
   const address = ({
     name,
     phoneNumber,
@@ -83,7 +85,7 @@ exports.createAddress = (req, res) => {
 
   Address.create(address)
     .then((address) => {
-      res.status(201).json({ data: address, message: "Successs" });
+      res.status(201).json({ data: address, message: "Success" });
     })
     .catch((err) => {
       res.status(500).json({ message: "Internal server error" });
@@ -97,7 +99,8 @@ exports.updateAddress = (req, res) => {
    * Update address with the given id
    */
 
-  const { id } = req.params;
+  const { customerId } = req.params;
+
   const newAddress = ({
     name,
     phoneNumber,
@@ -106,18 +109,19 @@ exports.updateAddress = (req, res) => {
     mainAddress,
     latitude,
     longitude,
-    customerId,
+    // customerId,
     cityId,
     provinceId,
     districtId,
     postalCodeId
   } = req.body);
 
-  Address.findOne({ where: { id: { [Op.eq]: id } } })
+  Address.findOne({ where: { customerId: { [Op.eq]: customerId } } })
     .then((address) => {
+      console.log(address);
       if (address) {
         return address.update(newAddress).then((updatedAddress) => {
-          res.status(200).json({ data: updatedAddress, message: "Sucess" });
+          res.status(200).json({ data: updatedAddress, message: "Success" });
         });
       } else {
         res.status(404).json({ message: "Address not found" });
@@ -142,7 +146,7 @@ exports.deleteAddress = (req, res) => {
       return address.destroy();
     })
     .then((address) => {
-      res.status(200).json({ data: address, message: "Sucess" });
+      res.status(200).json({ data: address, message: "Success" });
     })
     .catch((err) => {
       res.status(500).json({ message: "Internal server error" });

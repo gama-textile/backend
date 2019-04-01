@@ -424,70 +424,118 @@ body {
                     <li><span id="toggle-passes" class="toggle-passes">show failures only</span></li>
                 </ul>
                 <ul class="mocha-stats">
-                    <li class="passes">passes: <em>18</em></li>
+                    <li class="passes">passes: <em>28</em></li>
                     <li class="pending">pending: <em>0</em></li>
                     <li class="failures">failures: <em>5</em></li>
-                    <li class="duration">duration: <em>2.3s</em></li>
+                    <li class="duration">duration: <em>303ms</em></li>
                 </ul>
             </div>
-            <ul id="report"><li class="suite"><h1>/Address CRUD</h1><ul><li class="test fail"><h2>Uncaught error outside test suite</h2><pre><code></code></pre><pre class="error">AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 404
-    at chai.request.get.end (test/productInboudTest.js:15:27)
-    at Test.Request.callback (node_modules/superagent/lib/node/index.js:716:12)
-    at IncomingMessage.parser (node_modules/superagent/lib/node/index.js:916:18)
-    at endReadableNT (_stream_readable.js:1103:12)
-    at process._tickCallback (internal/process/next_tick.js:63:19)</pre></li><li class="test fail"><h2>Should insert address into database</h2><pre><code>chai
+            <ul id="report"><li class="suite"><h1>Address Crud</h1><ul><li class="test pass medium"><h2>It should get all address<span class="duration">53ms</span></h2><pre><code>chai
   .request(app)
-  .post(&#x22;/api/addresses&#x22;)
-  .send(address)
+  .get(&#x22;/api/addresses&#x22;)
   .end((err, res) =&#x3E; {
     expect(res).to.have.status(200);
     expect(res).to.be.json;
     expect(res.body).to.have.property(&#x22;message&#x22;);
+    expect(res.body.message).to.equal(&#x22;Success&#x22;);
+    expect(res.body).to.have.property(&#x22;data&#x22;);
+    done();
+  });</code></pre></li><li class="test pass fast"><h2>It Should create new address single customer<span class="duration">30ms</span></h2><pre><code>chai
+  .request(app)
+  .post(&#x22;/api/addresses&#x22;)
+  .send(newAddress)
+  .end((err, res) =&#x3E; {
+    expect(res).to.have.status(201);
+    expect(res).to.be.json;
+    expect(res.body).to.have.property(&#x22;message&#x22;);
+    expect(res.body.message).to.equal(&#x22;Success&#x22;);
     expect(res.body).to.have.property(&#x22;data&#x22;);
     addressId = res.body.data.id;
+    customerId = res.body.data.customerId;
+    newAddress.name = res.body.data.name;
+    newAddress.phoneNumber = res.body.data.phoneNumber;
+    newAddress.description = res.body.data.description;
+    newAddress.storeAddress = res.body.data.storeAddress;
+    newAddress.mainAddress = res.body.data.mainAddress;
+    newAddress.latitude = res.body.data.latitude;
+    newAddress.longitude = res.body.data.longitude;
+    newAddress.customerId = res.body.data.customerId;
+    newAddress.cityId = res.body.data.cityId;
+    newAddress.provinceId = res.body.data.provinceId;
+    newAddress.districtId = res.body.data.districtId;
+    newAddress.postalCodeId = res.body.data.postalCodeId;
     done();
-  });</code></pre><pre class="error">AssertionError: expected &#x27;succes&#x27; to equal &#x27;Success&#x27;
-    at chai.request.get.end (test/addressesTest.js:19:35)
-    at Test.Request.callback (node_modules/superagent/lib/node/index.js:716:12)
-    at parser (node_modules/superagent/lib/node/index.js:916:18)
-    at IncomingMessage.res.on (node_modules/superagent/lib/node/parsers/json.js:19:7)
-    at endReadableNT (_stream_readable.js:1103:12)
-    at process._tickCallback (internal/process/next_tick.js:63:19)</pre></li><li class="test pass fast"><h2>GET SINGLE ADDRESS<span class="duration">undefinedms</span></h2><pre><code>chai
+  });</code></pre></li><li class="test pass fast"><h2>Should create adress in database<span class="duration">5ms</span></h2><pre><code>Address.findOne({
+  where: {
+    id: addressId
+  }
+})
+  .then((address) =&#x3E; {
+    expect(address.name).to.equal(newAddress.name);
+    expect(address.phoneNumber).to.equal(newAddress.phoneNumber);
+    expect(address.description).to.equal(newAddress.description);
+    expect(address.storeAddress).to.equal(newAddress.storeAddress);
+    expect(address.mainAddress).to.equal(newAddress.mainAddress);
+    expect(address.latitude).to.equal(newAddress.latitude);
+    expect(address.longitude).to.equal(newAddress.longitude);
+    expect(address.customerId).to.equal(newAddress.customerId);
+    expect(address.cityId).to.equal(newAddress.cityId);
+    expect(address.provinceId).to.equal(newAddress.provinceId);
+    expect(address.districtId).to.equal(newAddress.districtId);
+    expect(address.postalCodeId).to.equal(newAddress.postalCodeId);
+  })
+  .finally(done);</code></pre></li><li class="test pass fast"><h2>It should get all address single customer<span class="duration">10ms</span></h2><pre><code>chai
   .request(app)
-  .get(&#x60;/api/addresses/${addressId}&#x60;)
+  .get(&#x60;/api/addresses/${customerId}&#x60;)
   .end((err, res) =&#x3E; {
-    expect(res.body.data.name).to.equal(address.name);
-    expect(res.body.data.phoneNumber).to.equal(address.phoneNumber);
-    expect(res.body.data.description).to.equal(address.description);
-    expect(res.body.data.storeAddress).to.equal(address.storeAddress);
-    expect(res.body.data.mainAddress).to.equal(address.mainAddress);
-    expect(res.body.data.latitude).to.equal(address.latitude);
-    expect(res.body.data.longitude).to.equal(address.longitude);
-    expect(res.body.data.customerId).to.equal(address.customerId);
-    expect(res.body.data.cityId).to.equal(address.cityId);
-    expect(res.body.data.provinceId).to.equal(address.provinceId);
-    expect(res.body.data.districtId).to.equal(address.districtId);
-    expect(res.body.data.postalCodeId).to.equal(address.postalCodeId);
+    expect(res).to.have.status(200);
+    expect(res).to.be.json;
+    expect(res.body).to.have.property(&#x22;message&#x22;);
+    expect(res.body.message).to.equal(&#x22;Success&#x22;);
+    expect(res.body).to.have.property(&#x22;data&#x22;);
     done();
-  });</code></pre></li><li class="test pass fast"><h2>Should update the insertedd address<span class="duration">19ms</span></h2><pre><code>chai
+  });</code></pre></li><li class="test pass fast"><h2>should update address single customer<span class="duration">14ms</span></h2><pre><code>chai
   .request(app)
-  .put(&#x60;/api/addresses/${addressId}&#x60;)
-  .send(updatedAddress)
+  .put(&#x60;/api/addresses/${customerId}&#x60;)
+  .send(updateAddress)
   .end((err, res) =&#x3E; {
-    expect(res.body.data.name).to.equal(&#x22;Alamat Rumah Ku&#x22;);
-    expect(res.body.data.phoneNumber).to.equal(address.phoneNumber);
-    expect(res.body.data.description).to.equal(address.description);
-    expect(res.body.data.storeAddress).to.equal(address.storeAddress);
-    expect(res.body.data.mainAddress).to.equal(address.mainAddress);
-    expect(res.body.data.latitude).to.equal(address.latitude);
-    expect(res.body.data.longitude).to.equal(address.longitude);
-    expect(res.body.data.customerId).to.equal(address.customerId);
-    expect(res.body.data.cityId).to.equal(address.cityId);
-    expect(res.body.data.provinceId).to.equal(address.provinceId);
-    expect(res.body.data.districtId).to.equal(address.districtId);
-    expect(res.body.data.postalCodeId).to.equal(address.postalCodeId);
+    expect(res).to.have.status(200);
+    expect(res).to.be.json;
+    expect(res.body).to.have.property(&#x22;message&#x22;);
+    expect(res.body.message).to.equal(&#x22;Success&#x22;);
+    expect(res.body).to.have.property(&#x22;data&#x22;);
+    updateAddress.name = res.body.data.name;
+    updateAddress.phoneNumber = res.body.data.phoneNumber;
+    updateAddress.description = res.body.data.description;
+    updateAddress.storeAddress = res.body.data.storeAddress;
+    updateAddress.mainAddress = res.body.data.mainAddress;
+    updateAddress.latitude = res.body.data.latitude;
+    updateAddress.longitude = res.body.data.longitude;
+    updateAddress.customerId = res.body.data.customerId;
+    updateAddress.cityId = res.body.data.cityId;
+    updateAddress.provinceId = res.body.data.provinceId;
+    updateAddress.districtId = res.body.data.districtId;
+    updateAddress.postalCodeId = res.body.data.postalCodeId;
     done();
-  });</code></pre></li><li class="test pass fast"><h2>Delete the updated address<span class="duration">undefinedms</span></h2><pre><code>chai
+  });</code></pre></li><li class="test pass fast"><h2>Should update address in database<span class="duration">2ms</span></h2><pre><code>Address.findOne({
+  where: {
+    customerId: customerId
+  }
+}).then((address) =&#x3E; {
+  expect(address.name).to.equal(updateAddress.name);
+  expect(address.phoneNumber).to.equal(updateAddress.phoneNumber);
+  expect(address.description).to.equal(updateAddress.description);
+  expect(address.storeAddress).to.equal(updateAddress.storeAddress);
+  expect(address.mainAddress).to.equal(updateAddress.mainAddress);
+  expect(address.latitude).to.equal(updateAddress.latitude);
+  expect(address.longitude).to.equal(updateAddress.longitude);
+  expect(address.customerId).to.equal(updateAddress.customerId);
+  expect(address.cityId).to.equal(updateAddress.cityId);
+  expect(address.provinceId).to.equal(updateAddress.provinceId);
+  expect(address.districtId).to.equal(updateAddress.districtId);
+  expect(address.postalCodeId).to.equal(updateAddress.postalCodeId);
+  done();
+});</code></pre></li><li class="test pass fast"><h2>Delete the updated address<span class="duration">8ms</span></h2><pre><code>chai
   .request(app)
   .del(&#x60;/api/addresses/${addressId}&#x60;)
   .end((err, res) =&#x3E; {
@@ -495,192 +543,297 @@ body {
     expect(res).to.be.json;
     expect(res.body).to.have.property(&#x22;data&#x22;);
     expect(res.body).to.have.property(&#x22;message&#x22;);
+    expect(res.body.message).to.equal(&#x22;Success&#x22;);
     done();
-  });</code></pre></li></ul></li><li class="suite"><h1>/GET banks</h1><ul><li class="test pass fast"><h2>It should get all banks<span class="duration">undefinedms</span></h2><pre><code>chai
-&#x9;.request(app)
-&#x9;.get(&#x22;/api/banks&#x22;)
-&#x9;.end((err, res) =&#x3E; {
-&#x9;&#x9;expect(res).to.have.status(200);
-&#x9;&#x9;expect(res).to.be.json;
-&#x9;&#x9;expect(res.body).to.have.property(&#x22;message&#x22;);
-&#x9;&#x9;expect(res.body.message).to.equal(&#x22;Success read all banks&#x22;);
-&#x9;&#x9;expect(res.body).to.have.property(&#x22;data&#x22;);
-&#x9;&#x9;done();
-&#x9;});</code></pre></li><li class="suite"><h1>/POST banks</h1><ul><li class="test pass fast"><h2>It should get all banks<span class="duration">7ms</span></h2><pre><code>chai
-&#x9;.request(app)
-&#x9;.get(&#x22;/api/banks&#x22;)
-&#x9;.end((err, res) =&#x3E; {
-&#x9;&#x9;expect(res).to.have.status(200);
-&#x9;&#x9;expect(res).to.be.json;
-&#x9;&#x9;expect(res.body).to.have.property(&#x22;message&#x22;);
-&#x9;&#x9;expect(res.body.message).to.equal(&#x22;Success read all banks&#x22;);
-&#x9;&#x9;expect(res.body).to.have.property(&#x22;data&#x22;);
-&#x9;&#x9;done();
-&#x9;});</code></pre></li></ul></li><li class="suite"><h1>/PUT/:id bank</h1><ul><li class="test fail"><h2>should update bank info</h2><pre><code>chai
-&#x9;.request(app)
-&#x9;.put(&#x60;/api/bankS/${bankId}&#x60;)
-&#x9;.send({ name: &#x22;BCA&#x22;, nomorRekening: &#x22;009-002-001&#x22; })
-&#x9;.end((err, res) =&#x3E; {
-&#x9;&#x9;expect(res).to.have.status(201);
-&#x9;&#x9;expect(res).to.be.json;
-&#x9;&#x9;expect(res.body).to.have.property(&#x22;message&#x22;);
-&#x9;&#x9;expect(res.body.message).to.equal(&#x22;Success update bank&#x22;);
-&#x9;&#x9;expect(res.body).to.have.property(&#x22;data&#x22;);
-&#x9;&#x9;name = res.body.data.name;
-&#x9;&#x9;nomorRekening = res.body.data.nomorRekening;
-&#x9;&#x9;done();
-&#x9;});</code></pre><pre class="error">AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 201 but got 404
-    at chai.request.put.send.end (test/banksTest.js:85:25)
-    at Test.Request.callback (node_modules/superagent/lib/node/index.js:716:12)
-    at parser (node_modules/superagent/lib/node/index.js:916:18)
-    at IncomingMessage.res.on (node_modules/superagent/lib/node/parsers/json.js:19:7)
-    at endReadableNT (_stream_readable.js:1103:12)
-    at process._tickCallback (internal/process/next_tick.js:63:19)</pre></li><li class="test fail"><h2>Should update bank in database</h2><pre><code>Bank.findOne({
-&#x9;where: {
-&#x9;&#x9;id: bankId
-&#x9;}
-}).then((bank) =&#x3E; {
-&#x9;expect(bank.name).to.equal(name);
-&#x9;expect(bank.nomorRekening).to.equal(nomorRekening);
-&#x9;done();
-});</code></pre><pre class="error">Error: Timeout of 2000ms exceeded. For async tests and hooks, ensure &#x22;done()&#x22; is called; if returning a Promise, ensure it resolves. (/home/elfin/Elfin/portofolio/gama/backend/test/banksTest.js)</pre></li></ul></li><li class="suite"><h1>/DELETE/:id bank</h1><ul><li class="test fail"><h2>Should delete a bank</h2><pre><code>chai
-&#x9;.request(app)
-&#x9;.del(&#x60;/api/banks/${bankId}&#x60;)
-&#x9;.end((err, res) =&#x3E; {
-&#x9;&#x9;expect(res).to.have.status(200);
-&#x9;&#x9;expect(res).to.be.json;
-&#x9;&#x9;expect(res.body).to.have.property(&#x22;message&#x22;);
-&#x9;&#x9;expect(res.body.message).to.equal(&#x22;Success delete bank&#x22;);
-&#x9;&#x9;expect(res.body).to.have.property(&#x22;data&#x22;);
-&#x9;&#x9;done();
-&#x9;});</code></pre><pre class="error">AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 404
-    at chai.request.del.end (test/banksTest.js:122:25)
-    at Test.Request.callback (node_modules/superagent/lib/node/index.js:716:12)
-    at parser (node_modules/superagent/lib/node/index.js:916:18)
-    at IncomingMessage.res.on (node_modules/superagent/lib/node/parsers/json.js:19:7)
-    at endReadableNT (_stream_readable.js:1103:12)
-    at process._tickCallback (internal/process/next_tick.js:63:19)</pre></li><li class="test pass fast"><h2>Should delete bank in database<span class="duration">3ms</span></h2><pre><code>Bank.findOne({
-&#x9;where: {
-&#x9;&#x9;id: bankId
-&#x9;}
-}).then((bank) =&#x3E; {
-&#x9;expect(bank).to.equal(null);
-&#x9;done();
-});</code></pre></li></ul></li><li class="suite"><h1>/PostalCode CRUD</h1><ul><li class="test pass fast"><h2>Should insert postalCode into database<span class="duration">17ms</span></h2><pre><code>chai
+  });</code></pre></li><li class="test pass fast"><h2>Should delete address in database<span class="duration">2ms</span></h2><pre><code>Address.findOne({
+  where: {
+    id: addressId
+  }
+})
+  .then((address) =&#x3E; {
+    expect(address).to.equal(null);
+  })
+  .finally(done);</code></pre></li></ul></li><li class="suite"><h1>Banks Crud</h1><ul><li class="test pass fast"><h2>It should get all banks<span class="duration">4ms</span></h2><pre><code>chai
   .request(app)
-  .post(&#x22;/api/postalcodes&#x22;)
-  .send(postalCode)
+  .get(&#x22;/api/banks&#x22;)
   .end((err, res) =&#x3E; {
     expect(res).to.have.status(200);
     expect(res).to.be.json;
     expect(res.body).to.have.property(&#x22;message&#x22;);
+    expect(res.body.message).to.equal(&#x22;Success read all banks&#x22;);
+    expect(res.body).to.have.property(&#x22;data&#x22;);
+    done();
+  });</code></pre></li><li class="test pass fast"><h2>Should create new bank<span class="duration">7ms</span></h2><pre><code>chai
+  .request(app)
+  .post(&#x22;/api/banks&#x22;)
+  .send(newBank)
+  .end((err, res) =&#x3E; {
+    expect(res).to.have.status(201);
+    expect(res).to.be.json;
+    expect(res.body).to.have.property(&#x22;message&#x22;);
+    expect(res.body.message).to.equal(&#x22;Success create bank&#x22;);
+    expect(res.body).to.have.property(&#x22;data&#x22;);
+    bankId = res.body.data.id;
+    newBank.name = res.body.data.name;
+    newBank.nomorRekening = res.body.data.nomorRekening;
+    done();
+  });</code></pre></li><li class="test pass fast"><h2>Should create bank in database<span class="duration">2ms</span></h2><pre><code>Bank.findOne({
+  where: {
+    id: bankId
+  }
+}).then((bank) =&#x3E; {
+  expect(bank.name).to.equal(newBank.name);
+  expect(bank.nomorRekening).to.equal(newBank.nomorRekening);
+  done();
+});</code></pre></li><li class="test pass fast"><h2>should update bank<span class="duration">7ms</span></h2><pre><code>chai
+  .request(app)
+  .put(&#x60;/api/banks/${bankId}&#x60;)
+  .send({ name: &#x22;BCA&#x22;, nomorRekening: &#x22;009-002-001&#x22; })
+  .end((err, res) =&#x3E; {
+    expect(res).to.have.status(201);
+    expect(res).to.be.json;
+    expect(res.body).to.have.property(&#x22;message&#x22;);
+    expect(res.body.message).to.equal(&#x22;Success update bank&#x22;);
+    expect(res.body).to.have.property(&#x22;data&#x22;);
+    updateBank.name = res.body.data.name;
+    updateBank.nomorRekening = res.body.data.nomorRekening;
+    done();
+  });</code></pre></li><li class="test pass fast"><h2>Should update bank in database<span class="duration">2ms</span></h2><pre><code>Bank.findOne({
+  where: {
+    id: bankId
+  }
+}).then((bank) =&#x3E; {
+  expect(bank.name).to.equal(updateBank.name);
+  expect(bank.nomorRekening).to.equal(updateBank.nomorRekening);
+  done();
+});</code></pre></li><li class="test pass fast"><h2>Should delete a bank<span class="duration">8ms</span></h2><pre><code>chai
+  .request(app)
+  .del(&#x60;/api/banks/${bankId}&#x60;)
+  .end((err, res) =&#x3E; {
+    expect(res).to.have.status(200);
+    expect(res).to.be.json;
+    expect(res.body).to.have.property(&#x22;message&#x22;);
+    expect(res.body.message).to.equal(&#x22;Success delete bank&#x22;);
+    expect(res.body).to.have.property(&#x22;data&#x22;);
+    done();
+  });</code></pre></li><li class="test pass fast"><h2>Should delete bank in database<span class="duration">1ms</span></h2><pre><code>Bank.findOne({
+  where: {
+    id: bankId
+  }
+}).then((bank) =&#x3E; {
+  expect(bank).to.equal(null);
+  done();
+});</code></pre></li></ul></li><li class="suite"><h1>/carts CRUD</h1><ul><li class="test pass fast"><h2>Should insert cart into database<span class="duration">6ms</span></h2><pre><code>chai
+  .request(app)
+  .post(&#x22;/api/carts&#x22;)
+  .send(cart)
+  .end((err, res) =&#x3E; {
+    expect(res).to.have.status(201);
+    expect(res).to.be.json;
+    expect(res.body).to.have.property(&#x22;message&#x22;);
+    expect(res.body).to.have.property(&#x22;data&#x22;);
+    cartId = res.body.data.id;
+    done();
+  });</code></pre></li><li class="test pass fast"><h2>GET SINGLE CART<span class="duration">5ms</span></h2><pre><code>chai
+  .request(app)
+  .get(&#x60;/api/carts/${cartId}&#x60;)
+  .end((err, res) =&#x3E; {
+    expect(res.body.data.productInboundId).to.equal(cart.productInboundId);
+    expect(res.body.data.customerId).to.equal(cart.customerId);
+    expect(res.body.data.note).to.equal(cart.note);
+    expect(res.body.data.length_per_meter).to.equal(cart.length_per_meter);
+    done();
+  });</code></pre></li><li class="test pass fast"><h2>Should update cart<span class="duration">7ms</span></h2><pre><code>chai
+  .request(app)
+  .put(&#x60;/api/carts/${cartId}&#x60;)
+  .send(updatedNote)
+  .end((err, res) =&#x3E; {
+    expect(res.body.data.productInboundId).to.equal(cart.productInboundId);
+    expect(res.body.data.customerId).to.equal(cart.customerId);
+    expect(res.body.data.note).to.equal(&#x22;Updated Note&#x22;);
+    expect(res.body.data.length_per_meter).to.equal(cart.length_per_meter);
+    done();
+  });</code></pre></li><li class="test pass fast"><h2>Delete cart<span class="duration">5ms</span></h2><pre><code>chai
+  .request(app)
+  .del(&#x60;/api/carts/${cartId}&#x60;)
+  .end((err, res) =&#x3E; {
+    expect(res).to.have.status(200);
+    expect(res).to.be.json;
+    expect(res.body).to.have.property(&#x22;data&#x22;);
+    expect(res.body).to.have.property(&#x22;message&#x22;);
+    done();
+  });</code></pre></li></ul></li><li class="suite"><h1>GET all add</h1><ul><li class="test fail"><h2>It should get all productinbounds</h2><pre><code>chai
+  .request(app)
+  .get(&#x22;/api/productinbounds&#x22;)
+  .end((err, res) =&#x3E; {
+    expect(res).to.have.status(200);
+    expect(res).to.be.json;
+    expect(res.body).to.have.property(&#x22;message&#x22;);
+    expect(res.body.message).to.equal(&#x22;Success&#x22;);
+    expect(res.body).to.have.property(&#x22;data&#x22;);
+    done();
+  });</code></pre><pre class="error">AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 404
+    at chai.request.get.end (test/catalogproductTest.js:34:29)
+    at Test.Request.callback (node_modules/superagent/lib/node/index.js:716:12)
+    at parser (node_modules/superagent/lib/node/index.js:916:18)
+    at IncomingMessage.res.on (node_modules/superagent/lib/node/parsers/json.js:19:7)
+    at endReadableNT (_stream_readable.js:1125:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)</pre></li><li class="test fail"><h2>It sould post the productinbounds info</h2><pre><code>chai
+  .request(app)
+  .post(&#x22;/api/productinbounds&#x22;)
+  .send(productinbound)
+  .end((err, res) =&#x3E; {
+    expect(res).to.have.status(201);
+    expect(res).to.be.json;
+    expect(res.body).to.have.property(&#x22;message&#x22;);
+    expect(res.body.message).to.equal(&#x22;Success&#x22;);
+    expect(res.body).to.have.property(&#x22;data&#x22;);
+    productinboundId = res.body.data.id;
+    done();
+  });</code></pre><pre class="error">AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 201 but got 404
+    at chai.request.post.send.end (test/catalogproductTest.js:53:29)
+    at Test.Request.callback (node_modules/superagent/lib/node/index.js:716:12)
+    at parser (node_modules/superagent/lib/node/index.js:916:18)
+    at IncomingMessage.res.on (node_modules/superagent/lib/node/parsers/json.js:19:7)
+    at endReadableNT (_stream_readable.js:1125:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)</pre></li><li class="test fail"><h2>Get single productinbound</h2><pre><code>chai
+  .request(app)
+  .get(&#x60;/api/productinbounds/${productinboundId}&#x60;)
+  .end((err, res) =&#x3E; {
+    expect(res.body.data.color).to.equal(productinbound.color);
+    expect(res.body.data.ingredients).to.equal(productinbound.ingredients);
+    expect(res.body.data.description).to.equal(productinbound.description);
+    expect(res.body.data.price).to.equal(productinbound.price);
+    expect(res.body.data.meter).to.equal(productinbound.meter);
+    expect(res.body.data.capital).to.equal(productinbound.capital);
+    expect(res.body.data.productId).to.equal(productinbound.productId);
+    expect(res.body.data.supplierId).to.equal(productinbound.supplierId);
+    done();
+  });</code></pre><pre class="error">TypeError: Cannot read property &#x27;color&#x27; of undefined
+    at chai.request.get.end (test/catalogproductTest.js:69:30)
+    at Test.Request.callback (node_modules/superagent/lib/node/index.js:716:12)
+    at parser (node_modules/superagent/lib/node/index.js:916:18)
+    at IncomingMessage.res.on (node_modules/superagent/lib/node/parsers/json.js:19:7)
+    at endReadableNT (_stream_readable.js:1125:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)</pre></li><li class="test fail"><h2>Should update the insertedd productIbound</h2><pre><code>chai
+  .request(app)
+  .put(&#x60;/api/productinbounds/${productinboundId}&#x60;)
+  .send(updateproductinbound)
+  .end((err, res) =&#x3E; {
+    expect(res.body.data.color).to.equal(updateproductinbound.color);
+    expect(res.body.data.ingredients).to.equal(
+      updateproductinbound.ingredients
+    );
+    done();
+  });</code></pre><pre class="error">TypeError: Cannot read property &#x27;color&#x27; of undefined
+    at chai.request.put.send.end (test/catalogproductTest.js:88:30)
+    at Test.Request.callback (node_modules/superagent/lib/node/index.js:716:12)
+    at parser (node_modules/superagent/lib/node/index.js:916:18)
+    at IncomingMessage.res.on (node_modules/superagent/lib/node/parsers/json.js:19:7)
+    at endReadableNT (_stream_readable.js:1125:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)</pre></li><li class="test fail"><h2>Delete the updated productinbounds</h2><pre><code>chai
+  .request(app)
+  .del(&#x60;/api/productinbounds/${productinboundId}&#x60;)
+  .end((err, res) =&#x3E; {
+    expect(res).to.have.status(200);
+    expect(res).to.be.json;
+    expect(res.body).to.have.property(&#x22;data&#x22;);
+    expect(res.body).to.have.property(&#x22;message&#x22;);
+    done();
+  });</code></pre><pre class="error">AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 404
+    at chai.request.del.end (test/catalogproductTest.js:102:29)
+    at Test.Request.callback (node_modules/superagent/lib/node/index.js:716:12)
+    at parser (node_modules/superagent/lib/node/index.js:916:18)
+    at IncomingMessage.res.on (node_modules/superagent/lib/node/parsers/json.js:19:7)
+    at endReadableNT (_stream_readable.js:1125:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)</pre></li></ul></li><li class="suite"><h1>Postal Code Crud</h1><ul><li class="test pass fast"><h2>It should get all postal code<span class="duration">7ms</span></h2><pre><code>chai
+  .request(app)
+  .get(&#x22;/api/postalcodes&#x22;)
+  .end((err, res) =&#x3E; {
+    expect(res).to.have.status(200);
+    expect(res).to.be.json;
+    expect(res.body).to.have.property(&#x22;message&#x22;);
+    expect(res.body.message).to.equal(&#x22;Success&#x22;);
+    expect(res.body).to.have.property(&#x22;data&#x22;);
+    done();
+  });</code></pre></li><li class="test pass fast"><h2>Should create new postal code<span class="duration">5ms</span></h2><pre><code>chai
+  .request(app)
+  .post(&#x22;/api/postalcodes&#x22;)
+  .send(newPostalCode)
+  .end((err, res) =&#x3E; {
+    expect(res).to.have.status(200);
+    expect(res).to.be.json;
+    expect(res.body).to.have.property(&#x22;message&#x22;);
+    expect(res.body.message).to.equal(&#x22;Success&#x22;);
     expect(res.body).to.have.property(&#x22;data&#x22;);
     postalCodeId = res.body.data.id;
+    newPostalCode.name = res.body.data.name;
     done();
-  });</code></pre></li><li class="test pass fast"><h2>GET SINGLE postalCode<span class="duration">7ms</span></h2><pre><code>chai
-  .request(app)
-  .get(&#x60;/api/postalcodes/${postalCodeId}&#x60;)
-  .end((err, res) =&#x3E; {
-    expect(res.body.data.name).to.equal(postalCode.name);
-    done();
-  });</code></pre></li><li class="test pass fast"><h2>Should update the insertedd postalCode<span class="duration">8ms</span></h2><pre><code>chai
+  });</code></pre></li><li class="test pass fast"><h2>Should create postal code in database<span class="duration">1ms</span></h2><pre><code>PostalCode.findOne({
+  where: {
+    id: postalCodeId
+  }
+}).then((postalcodes) =&#x3E; {
+  expect(postalcodes.name).to.equal(newPostalCode.name);
+  done();
+});</code></pre></li><li class="test pass fast"><h2>should update postal code<span class="duration">8ms</span></h2><pre><code>chai
   .request(app)
   .put(&#x60;/api/postalcodes/${postalCodeId}&#x60;)
-  .send(updatedpostalcode)
+  .send(updatedPostalCode)
   .end((err, res) =&#x3E; {
-    console.log(res.body.data.name);
-    expect(res.body.data.name).to.equal(updatedpostalcode.name);
+    expect(res).to.have.status(201);
+    expect(res).to.be.json;
+    expect(res.body).to.have.property(&#x22;message&#x22;);
+    expect(res.body.message).to.equal(&#x22;Success&#x22;);
+    expect(res.body).to.have.property(&#x22;data&#x22;);
+    updatedPostalCode.name = res.body.data.name;
     done();
-  });</code></pre></li><li class="test pass fast"><h2>Delete the updated postalCode<span class="duration">5ms</span></h2><pre><code>chai
+  });</code></pre></li><li class="test pass fast"><h2>Should update postal code in database<span class="duration">3ms</span></h2><pre><code>PostalCode.findOne({
+  where: {
+    id: postalCodeId
+  }
+}).then((postalcodes) =&#x3E; {
+  expect(postalcodes.name).to.equal(updatedPostalCode.name);
+  done();
+});</code></pre></li><li class="test pass fast"><h2>Should delete a postal code<span class="duration">7ms</span></h2><pre><code>chai
   .request(app)
   .del(&#x60;/api/postalcodes/${postalCodeId}&#x60;)
   .end((err, res) =&#x3E; {
     expect(res).to.have.status(200);
     expect(res).to.be.json;
-    expect(res.body).to.have.property(&#x22;data&#x22;);
     expect(res.body).to.have.property(&#x22;message&#x22;);
+    expect(res.body.message).to.equal(&#x22;Success&#x22;);
+    expect(res.body).to.have.property(&#x22;data&#x22;);
     done();
-  });</code></pre></li></ul></li><li class="suite"><h1>/GET products</h1><ul><li class="test pass fast"><h2>It should get all products<span class="duration">7ms</span></h2><pre><code>chai
+  });</code></pre></li><li class="test pass fast"><h2>Should delete postal code in database<span class="duration">2ms</span></h2><pre><code>PostalCode.findOne({
+  where: {
+    id: postalCodeId
+  }
+}).then((postalcodes) =&#x3E; {
+  expect(postalcodes).to.equal(null);
+  done();
+});</code></pre></li></ul></li><li class="suite"><h1>Transaction</h1><ul><li class="test pass fast"><h2>It should get all transaction<span class="duration">19ms</span></h2><pre><code>chai
   .request(app)
-  .get(&#x22;/api/products&#x22;)
+  .get(&#x22;/api/transactions&#x22;)
   .end((err, res) =&#x3E; {
     expect(res).to.have.status(200);
     expect(res).to.be.json;
     expect(res.body).to.have.property(&#x22;message&#x22;);
-    expect(res.body.message).to.equal(&#x22;Success read all products&#x22;);
+    expect(res.body.message).to.equal(&#x22;Success&#x22;);
     expect(res.body).to.have.property(&#x22;data&#x22;);
     done();
-  });</code></pre></li></ul></li><li class="suite"><h1>/GET suppliers</h1><ul><li class="test pass fast"><h2>It should get all suppliers<span class="duration">5ms</span></h2><pre><code>chai
+  });</code></pre></li><li class="test pass fast"><h2>Should insert transaction into database<span class="duration">7ms</span></h2><pre><code>chai
   .request(app)
-  .get(&#x22;/api/suppliers&#x22;)
-  .end((err, res) =&#x3E; {
-    expect(res).to.have.status(200);
-    expect(res).to.be.json;
-    expect(res.body).to.have.property(&#x22;message&#x22;);
-    expect(res.body.message).to.equal(&#x22;Success read all suppliers&#x22;);
-    expect(res.body).to.have.property(&#x22;data&#x22;);
-    done();
-  });</code></pre></li></ul></li><li class="suite"><h1>/POST supplier</h1><ul><li class="test pass fast"><h2>It sould post the supplier info<span class="duration">7ms</span></h2><pre><code>chai
-  .request(app)
-  .post(&#x22;/api/suppliers&#x22;)
-  .send({ name, alamat })
+  .post(&#x22;/api/transactions&#x22;)
+  .send(transaction)
   .end((err, res) =&#x3E; {
     expect(res).to.have.status(201);
     expect(res).to.be.json;
     expect(res.body).to.have.property(&#x22;message&#x22;);
-    expect(res.body.message).to.equal(&#x22;Success create supplier&#x22;);
-    expect(res.body).to.have.property(&#x22;data&#x22;);
-    supplierId = res.body.data.id;
-    name = res.body.data.name;
-    alamat = res.body.data.alamat;
-    done();
-  });</code></pre></li><li class="test pass fast"><h2>Should create supplier in database<span class="duration">4ms</span></h2><pre><code>Supplier.findOne({
-  where: {
-    id: supplierId
-  }
-}).then((supplier) =&#x3E; {
-  expect(supplier.name).to.equal(name);
-  expect(supplier.alamat).to.equal(alamat);
-  done();
-});</code></pre></li></ul></li><li class="suite"><h1>/PUT/:id supplier</h1><ul><li class="test pass fast"><h2>should update supplier info<span class="duration">8ms</span></h2><pre><code>chai
-  .request(app)
-  .put(&#x60;/api/suppliers/${supplierId}&#x60;)
-  .send({ name: &#x22;Iwann&#x22;, alamat: &#x22;jawa&#x22; })
-  .end((err, res) =&#x3E; {
-    expect(res).to.have.status(201);
-    expect(res).to.be.json;
-    expect(res.body).to.have.property(&#x22;message&#x22;);
-    expect(res.body.message).to.equal(&#x22;Success update supplier&#x22;);
-    expect(res.body).to.have.property(&#x22;data&#x22;);
-    name = res.body.data.name;
-    alamat = res.body.data.alamat;
-    done();
-  });</code></pre></li><li class="test pass fast"><h2>Should update supplier in database<span class="duration">2ms</span></h2><pre><code>Supplier.findOne({
-  where: {
-    id: supplierId
-  }
-}).then((supplier) =&#x3E; {
-  expect(supplier.name).to.equal(name);
-  expect(supplier.alamat).to.equal(alamat);
-  done();
-});</code></pre></li></ul></li><li class="suite"><h1>/DELETE/:id supplier</h1><ul><li class="test pass fast"><h2>Should delete a supplier<span class="duration">6ms</span></h2><pre><code>chai
-  .request(app)
-  .del(&#x60;/api/suppliers/${supplierId}&#x60;)
-  .end((err, res) =&#x3E; {
-    expect(res).to.have.status(200);
-    expect(res).to.be.json;
-    expect(res.body).to.have.property(&#x22;message&#x22;);
-    expect(res.body.message).to.equal(&#x22;Success delete supplier&#x22;);
+    expect(res.body.message).to.equal(&#x22;Success&#x22;);
     expect(res.body).to.have.property(&#x22;data&#x22;);
     done();
-  });</code></pre></li><li class="test pass fast"><h2>Should delete supplier in database<span class="duration">1ms</span></h2><pre><code>Supplier.findOne({
-  where: {
-    id: supplierId
-  }
-}).then((supplier) =&#x3E; {
-  expect(supplier).to.equal(null);
-  done();
-});</code></pre></li></ul></li></ul>
+  });</code></pre></li></ul></li></ul>
         </div>
         <script>
         function hideSuitesWithout(className) {

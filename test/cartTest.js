@@ -1,13 +1,23 @@
 process.env.NODE_ENV = "test";
 
-const chai = require('chai');
+const chai = require("chai");
 const expect = chai.expect;
 const chaiHttp = require("chai-http");
 const app = require("../app");
 const { Cart } = require("../models");
 
-
 chai.use(chaiHttp);
+var cartId = 0;
+var cart = {
+  productInboundId: 1,
+  customerId: 2,
+  note: "Warna Hijau",
+  length_per_meter: 6
+};
+
+var updatedNote = {
+  note: "Updated Note"
+};
 
 describe("GET all add", (done) => {
   chai
@@ -21,18 +31,6 @@ describe("GET all add", (done) => {
       expect(res.body).to.have.property("data");
     });
 });
-
-var cartId = 0;
-var cart = {
-	productInboundId: 1,
-	customerId: 2,
-	note: "Warna Hijau",
-	length_per_meter:6
-};
-
-var updatedNote = {
-  note: "Updated Note"
-};
 
 describe("/carts CRUD", () => {
   // Insert an address
