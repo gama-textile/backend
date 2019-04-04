@@ -18,6 +18,7 @@ const cartRouter = require("./routes/carts");
 const indexRouter = require("./routes/index");
 const postalCodeRouter = require("./routes/postalCodes");
 const transactionRouter = require("./routes/transactions");
+const customerRouter = require("./routes/customers");
 
 const app = express();
 
@@ -54,6 +55,7 @@ app.use("/api/carts", cartRouter);
 app.use("/api/catalog-products", catalogProductRouter);
 app.use("/api/postalcodes", postalCodeRouter);
 app.use("/api/transactions", transactionRouter);
+app.use("/api/customers", customerRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

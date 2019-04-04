@@ -32,6 +32,65 @@ module.exports = {
           supplierId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
+        },
+
+        {
+          id: 3,
+          color: "biru",
+          material: "kain oke",
+          description: "barang bagus iya mbak",
+          price: 2500,
+          meter: 20,
+          capital: 1000,
+          dateOfInbound: new Date(),
+          productId: 1,
+          supplierId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+
+        {
+          id: 4,
+          color: "biru",
+          material: "kain oke",
+          description: "barang bagus iya mbak",
+          price: 2500,
+          meter: 20,
+          capital: 1000,
+          dateOfInbound: new Date(),
+          productId: 1,
+          supplierId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          id: 5,
+          color: "biru",
+          material: "kain oke",
+          description: "barang bagus iya mbak",
+          price: 2500,
+          meter: 20,
+          capital: 1000,
+          dateOfInbound: new Date(),
+          productId: 1,
+          supplierId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+
+        {
+          id: 6,
+          color: "biru",
+          material: "kain oke",
+          description: "barang bagus iya mbak",
+          price: 2500,
+          meter: 20,
+          capital: 1000,
+          dateOfInbound: new Date(),
+          productId: 1,
+          supplierId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       ],
       {}
