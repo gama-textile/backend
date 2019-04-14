@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      nameProduct: {
         type: Sequelize.STRING
       },
       size: {
@@ -16,7 +16,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       imageUrl: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
