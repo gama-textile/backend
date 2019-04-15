@@ -6,7 +6,7 @@ module.exports = {
       "Products",
       [
         {
-          name: "Kain",
+          nameProduct: "Kain",
           size: 10 /* size = dengan bahan */,
           imageUrl: "",
           createdAt: new Date(),
