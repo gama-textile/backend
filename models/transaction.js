@@ -5,9 +5,10 @@ module.exports = (sequelize, DataTypes) => {
     {
       dateOfTransaction: DataTypes.DATE,
       dropShipName: DataTypes.STRING,
+      statusTransaction: DataTypes.STRING,
+      totalPriceTransaction: DataTypes.BIGINT,
       customerId: DataTypes.INTEGER,
       shippingAddressId: DataTypes.INTEGER
-      // transactionDetailId: DataTypes.INTEGER
     },
     {}
   );

@@ -14,6 +14,12 @@ module.exports = {
       dropShipName: {
         type: Sequelize.STRING
       },
+      statusTransaction: {
+        type: Sequelize.STRING
+      },
+      totalPriceTransaction: {
+        type: Sequelize.BIGINT
+      },
       customerId: {
         type: Sequelize.INTEGER
       },
