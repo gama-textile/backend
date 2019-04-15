@@ -1,5 +1,20 @@
 const Op = require("sequelize").Op;
-const { Customer } = require("../models");
+const { Authentication, Customer } = require("../models");
+
+exports.getAllCustomer = (req, res) => {
+  /*
+   * GET api/customers/
+   * this function return customer data
+   */
+  Authentication.findAll({ include: [{ model: Customer }] })
+    .then((customer) => {
+      res.status(200).json({ data: customer, message: "Success" });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "Internal server error" });
+      console.log(err);
+    });
+};
 
 exports.getSingleCustomer = (req, res) => {
   /*

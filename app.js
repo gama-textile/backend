@@ -23,7 +23,7 @@ const customerRouter = require("./routes/customers");
 //import api admin
 const authAdminRouter = require("./routes/authAdmin");
 const managementProductRouter = require("./routes/adminManagementProducts");
-
+const customerAdminRouter = require("./routes/adminManagementCustomer");
 const app = express();
 
 // Passport configuration
@@ -64,6 +64,7 @@ app.use("/api/customers", customerRouter);
 //use api admin or back office
 app.use("/api/auth-admin", authAdminRouter);
 app.use("/api/management-products", managementProductRouter);
+app.use("/api/management-customers", customerAdminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
