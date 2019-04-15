@@ -6,10 +6,10 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.BIGINT
+        type: Sequelize.INTEGER
       },
       customerId: {
-        type: Sequelize.BIGINT
+        type: Sequelize.INTEGER
       },
       email: {
         type: Sequelize.STRING
