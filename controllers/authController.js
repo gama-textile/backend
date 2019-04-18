@@ -14,6 +14,7 @@ exports.signup = (req, res) => {
     firstName,
     lastName,
     customerId,
+    username,
     email,
     password,
     phoneNumber,
@@ -22,34 +23,32 @@ exports.signup = (req, res) => {
   } = req.body;
 
   const hashPassword = bcrypt.hashSync(password, 10);
-  Authentication.findOne({ where: { phoneNumber: phoneNumber } }).then(
-    (auth) => {
-      if (auth) {
-        res.status(403).json({ message: "phoneNumber sudah terpakai" });
-      } else {
-        Customer.create({
-          firstName,
-          lastName
-        }).then((customer) => {
-          Authentication.create({
-            customerId,
-            phoneNumber,
-            password: hashPassword
-          })
-            .then((authCreate) => {
-              res.status(201).json({
-                message: "Success signin customer",
-                data: authCreate
-              });
-            })
-            .catch((err) => {
-              console.log(err);
-              res.status(500).json({ message: "Something Went Wrong" });
+  Authentication.findOne({ where: { username: username } }).then((auth) => {
+    if (auth) {
+      res.status(403).json({ message: "phoneNumber sudah terpakai" });
+    } else {
+      Customer.create({
+        firstName,
+        lastName
+      }).then((customer) => {
+        Authentication.create({
+          customerId,
+          username,
+          password: hashPassword
+        })
+          .then((authCreate) => {
+            res.status(201).json({
+              message: "Success signin customer",
+              data: authCreate
             });
-        });
-      }
+          })
+          .catch((err) => {
+            console.log(err);
+            res.status(500).json({ message: "Something Went Wrong" });
+          });
+      });
     }
-  );
+  });
 };
 
 exports.signin = (req, res) => {
@@ -57,10 +56,10 @@ exports.signin = (req, res) => {
    *POST api/authentications/signin
    * this function signin or login
    */
-  const { phoneNumber, password } = req.body;
+  const { username, password } = req.body;
   Authentication.findOne({
     where: {
-      phoneNumber: phoneNumber
+      username: username
     }
   })
     .then((auth) => {
@@ -68,9 +67,12 @@ exports.signin = (req, res) => {
         const checkPassword = bcrypt.compareSync(password, auth.password);
         if (checkPassword === true) {
           const token = jwt.sign({ auth: auth }, "secret_key");
-          res
-            .status(200)
-            .json({ message: "Success Login", data: { token: token } });
+          res.status(200).json({
+            message: "Success Login",
+            data: { auth, token: token },
+
+            token: token
+          });
         } else {
           res.status(403).json({ message: "Invalid Login" });
         }

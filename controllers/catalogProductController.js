@@ -277,7 +277,7 @@ exports.updateProduct = (req, res) => {
     .then((product) => {
       if (product) {
         return product
-          .update({ nameProduct, width, imageUrl })
+          .update({ nameProduct, size, imageUrl })
           .then((product) => {
             res.status(201).json({ data: product, message: "Success" });
           });

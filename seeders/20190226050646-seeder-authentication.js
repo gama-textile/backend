@@ -10,6 +10,8 @@ module.exports = {
         {
           customerId: 1,
           email: "elfinsanjaya12@gmail.com",
+          username: "elfin",
+          domisili: "Lampung",
           password: password,
           facebook: "",
           phoneNumber: "08154023099",
@@ -21,6 +23,8 @@ module.exports = {
         {
           customerId: 2,
           email: "karya.tiosaputra@gmail.com",
+          username: "tio",
+          domisili: "Lampung",
           password: password,
           facebook: "",
           phoneNumber: "0895396914045",
