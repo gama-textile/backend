@@ -3,10 +3,17 @@ module.exports = (sequelize, DataTypes) => {
   const Transaction = sequelize.define(
     "Transaction",
     {
+      idPesanan: DataTypes.STRING,
       dateOfTransaction: DataTypes.DATE,
       dropShipName: DataTypes.STRING,
       statusTransaction: DataTypes.STRING,
       totalPriceTransaction: DataTypes.BIGINT,
+      typeOfOngkir: DataTypes.STRING, // JENIS PENGIRIMAN
+      shippingCosts: DataTypes.INTEGER, //BIAYA PENGIRIMAN
+      shippingPieces: DataTypes.INTEGER, //potongan pengiriman
+      note: DataTypes.STRING,
+      noResi: DataTypes.STRING,
+      proofOfPayment: DataTypes.STRING,
       customerId: DataTypes.INTEGER,
       shippingAddressId: DataTypes.INTEGER
     },

@@ -8,6 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      idPesanan: {
+        type: Sequelize.STRING,
+        unique: true,
+        allowNull: false
+      },
       dateOfTransaction: {
         type: Sequelize.DATE
       },
@@ -19,6 +24,25 @@ module.exports = {
       },
       totalPriceTransaction: {
         type: Sequelize.BIGINT
+      },
+      typeOfOngkir: {
+        type: Sequelize.STRING
+      },
+      shippingCosts: {
+        type: Sequelize.INTEGER
+      },
+
+      shippingPieces: {
+        type: Sequelize.INTEGER
+      },
+      note: {
+        type: Sequelize.STRING
+      },
+      noResi: {
+        type: Sequelize.STRING
+      },
+      proofOfPayment: {
+        type: Sequelize.TEXT
       },
       customerId: {
         type: Sequelize.INTEGER

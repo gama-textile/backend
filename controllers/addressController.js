@@ -92,7 +92,7 @@ exports.createAddress = (req, res) => {
     });
 };
 
-exports.updateAddress = (req, res) => {
+exports.updateAddressCusomers = (req, res) => {
   /*
    * params : id
    * PUT /api/addresses/1
@@ -147,6 +147,76 @@ exports.deleteAddress = (req, res) => {
     })
     .then((address) => {
       res.status(200).json({ data: address, message: "Success" });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "Internal server error" });
+    });
+};
+
+exports.getSingleAddrees = (req, res) => {
+  /*
+   * params : customerId
+   * GET /api/addresses/1
+   * Get all address by the gived customerId
+   */
+
+  const { id } = req.params;
+
+  Address.findAll({
+    include: [
+      { model: Customer },
+      { model: Province },
+      { model: City },
+      { model: District },
+      { model: PostalCode }
+    ],
+    where: { id: { [Op.eq]: id } }
+  })
+    .then((address) => {
+      if (address) {
+        return res.status(200).json({ data: address, message: "Success" });
+      }
+    })
+    .catch((err) => {
+      console.log("error");
+      res.status(500).json({ message: "Internal server error" });
+    });
+};
+
+exports.updateAddress = (req, res) => {
+  /*
+   * params : id
+   * PUT /api/addresses/1
+   * Update address with the given id
+   */
+
+  const { id } = req.params;
+
+  const newAddress = ({
+    name,
+    phoneNumber,
+    description,
+    storeAddress,
+    mainAddress,
+    latitude,
+    longitude,
+    // customerId,
+    cityId,
+    provinceId,
+    districtId,
+    postalCodeId
+  } = req.body);
+
+  Address.findOne({ where: { id: { [Op.eq]: id } } })
+    .then((address) => {
+      console.log(address);
+      if (address) {
+        return address.update(newAddress).then((updatedAddress) => {
+          res.status(200).json({ data: updatedAddress, message: "Success" });
+        });
+      } else {
+        res.status(404).json({ message: "Address not found" });
+      }
     })
     .catch((err) => {
       res.status(500).json({ message: "Internal server error" });

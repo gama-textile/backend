@@ -4,6 +4,8 @@ var {
   getAllAddress,
   getAllAddreesSingleCustomer,
   createAddress,
+  updateAddressCusomers,
+  getSingleAddrees,
   updateAddress,
   deleteAddress
 } = require("../controllers/addressController");
@@ -12,13 +14,19 @@ var {
 router.get("/", getAllAddress);
 
 /* get all address single customer */
-router.get("/:customerId", getAllAddreesSingleCustomer);
+router.get("/:customerId/customer", getAllAddreesSingleCustomer);
+
+/* get all address single customer */
+router.get("/:id/find", getSingleAddrees);
+
+/* update single customer address */
+router.put("/:id/edit", updateAddress);
 
 /* create address */
 router.post("/", createAddress);
 
 /* update single customer address */
-router.put("/:customerId", updateAddress);
+router.put("/:customerId/customer/edit", updateAddressCusomers);
 
 /* delete address */
 router.delete("/:id", deleteAddress);

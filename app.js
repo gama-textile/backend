@@ -19,11 +19,15 @@ const indexRouter = require("./routes/index");
 const postalCodeRouter = require("./routes/postalCodes");
 const transactionRouter = require("./routes/transactions");
 const customerRouter = require("./routes/customers");
+const cekOngkirRouter = require("./routes/cekOngkir");
+const transactionDetailRouter = require("./routes/transactionDetails");
 
 //import api admin
 const authAdminRouter = require("./routes/authAdmin");
 const managementProductRouter = require("./routes/adminManagementProducts");
 const customerAdminRouter = require("./routes/adminManagementCustomer");
+const adminTransactionRouter = require("./routes/adminTransactions");
+
 const app = express();
 
 // Passport configuration
@@ -60,11 +64,14 @@ app.use("/api/catalog-products", catalogProductRouter);
 app.use("/api/postalcodes", postalCodeRouter);
 app.use("/api/transactions", transactionRouter);
 app.use("/api/customers", customerRouter);
+app.use("/api/cek-ongkir", cekOngkirRouter);
+app.use("/api/transaction-detail", transactionDetailRouter);
 
 //use api admin or back office
 app.use("/api/auth-admin", authAdminRouter);
 app.use("/api/management-products", managementProductRouter);
 app.use("/api/management-customers", customerAdminRouter);
+app.use("/api/admin-transactions", adminTransactionRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

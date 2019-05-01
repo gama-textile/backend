@@ -10,7 +10,7 @@ exports.signup = (req, res) => {
    *POST api/auth/signup
    * this function add customers and authentication
    */
-  const {
+  var {
     firstName,
     lastName,
     customerId,
@@ -19,27 +19,36 @@ exports.signup = (req, res) => {
     password,
     phoneNumber,
     facebook,
-    salt
+    salt,
+    domisili
   } = req.body;
 
   const hashPassword = bcrypt.hashSync(password, 10);
   Authentication.findOne({ where: { username: username } }).then((auth) => {
     if (auth) {
-      res.status(403).json({ message: "phoneNumber sudah terpakai" });
+      res.status(403).json({ message: "Username sudah terpakai" });
     } else {
       Customer.create({
         firstName,
         lastName
       }).then((customer) => {
+        customerId = customer.id;
+        console.log(customerId);
         Authentication.create({
           customerId,
           username,
+          email,
+          phoneNumber,
+          facebook,
+          salt,
+          domisili,
           password: hashPassword
         })
           .then((authCreate) => {
             res.status(201).json({
               message: "Success signin customer",
-              data: authCreate
+              data: customer,
+              dataAuth: authCreate
             });
           })
           .catch((err) => {
