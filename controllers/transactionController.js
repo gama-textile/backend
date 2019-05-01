@@ -5,6 +5,7 @@ const {
   Address
 } = require("../models");
 const Op = require("sequelize").Op;
+const schedule = require('node-schedule');
 
 exports.getAlltransaction = (req, res) => {
   /*
@@ -150,6 +151,8 @@ exports.createTransaction = (req, res) => {
         })
           .then((transactions) => {
             res.status(201).json({ data: transactions, message: "Success" });
+
+            cancelOrderTimer(transactions.id);
           })
           .catch((err) => {
             console.log(err);
@@ -160,6 +163,33 @@ exports.createTransaction = (req, res) => {
     }
   );
 };
+
+// Fungsi untuk membatalkan order jika tidak ada bukti pembayaran yang sah
+function cancelOrderTimer(transactionId) {
+  // Batalkan pesanan pada tanggal
+  // Tanggal sekarang ditambah 4 jam
+  var date = new Date(Date.now() + 14400000); //14400000 = 4 hour || 10000 = 10 second(for testing)
+
+  // Task ini akan saat (sekarang + 4 jam)
+  var task = schedule.scheduleJob(date, function () {
+    console.log(`update with id ${transactionId}`);
+    Transaction.findOne({ where: { id: transactionId } }).then((transaction) => {
+      if (transaction) {
+        // Jika transaction.statusTransaction 'Pending' maka akan di ubah ke cancel
+        if (transaction.statusTransaction == 'Pending') {
+
+          // Cancel transaksi
+          transaction.update({ statusTransaction: 'Cancel' }).then((res) => console.log(`Success`));
+        }
+      } else {
+        // Jika transaction.statusTransaction 'Accepted' maka statusTransaction tidak akan diubah
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
+
+  });
+}
 
 exports.getAllTransactionSingleStatus = (req, res) => {
   /*
