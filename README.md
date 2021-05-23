@@ -21,6 +21,7 @@ Api ini di test / uji dengan menggunakan Aplikasi Postman Desktop
 
 | Nama Routes                                          | HTTP   | Deskripsi                                      | Dibuat | Hasil Test | Middleware `Auth` |
 | :--------------------------------------------------- | :----- | :--------------------------------------------- | :----- | :--------- | :---------------- |
+| `api gama textile`                                                                                                                                       |
 | `/api`                                               | GET    | Mendapatkan Halaman Utama dalam bentuk JSON    | Sudah  | OK         | Tidak             |
 | `/api/addresses`                                     | GET    | get all address                                | Sudah  | OK         | Tidak             |
 | `/api/addresses`                                     | POST   | create address                                 | Sudah  | OK         | Tidak             |
