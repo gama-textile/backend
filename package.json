@@ -9,7 +9,7 @@
     "db_reset": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all"
   },
   "dependencies": {
-    "async": "^2.6.2",
+    "async": "^2.6.4",
     "bcrypt": "^3.0.4",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
