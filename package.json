@@ -42,7 +42,7 @@
     "sequelize": "^4.43.0"
   },
   "devDependencies": {
-    "mocha": "^6.1.4",
+    "mocha": "^10.2.0",
     "mocha-simple-html-reporter": "^1.1.0",
     "nyc": "^13.3.0"
   }
